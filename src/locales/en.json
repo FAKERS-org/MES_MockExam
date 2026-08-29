@@ -26,6 +26,8 @@
   "subjects.ifl.english": "English",
   "subjects.ifl.chinese": "Chinese",
   "subjects.ifl.korean": "Korean",
+  "subjects.ifl.entranceExam": "Entrance Exam",
+  "subjects.ifl.allLanguages": "One combined test covering all language subjects",
   "exam.defaultTitle": "Mock Examination",
   "examType.mcq": "Multiple Choice",
   "exam.questionCount": "{count} questions",

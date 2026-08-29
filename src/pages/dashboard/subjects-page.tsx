@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, FunctionSquare, Atom, FlaskConical, Brain, Languages, BookText, BookOpen } from "lucide-react";
+import { ArrowLeft, FunctionSquare, Atom, FlaskConical, Brain, Languages, BookText, BookOpen, FileCheck2 } from "lucide-react";
 import "flag-icons/css/flag-icons.min.css";
 import ExamCard from "@/components/dashboard/exam-card";
 import { useLanguage } from "@/lib/i18n";
@@ -12,13 +12,14 @@ interface ExamSubject {
   typeKey: TranslationKey;
   icon: LucideIcon;
   questionCount: number;
-  durationHours: number;
+  durationMinutes: number;
 }
 
 interface ExamGroup {
   groupKey?: TranslationKey;
   flagCode?: string;
   subjects: ExamSubject[];
+  combinedExam?: boolean;
 }
 
 const grammar: ExamSubject = { id: "grammar", titleKey: "subjects.ifl.grammar", typeKey: "examType.mcq", icon: Languages, questionCount: 30, durationHours: 1 };
@@ -42,9 +43,9 @@ const subjectsByInstitution: Record<string, { titleKey: TranslationKey; groups: 
   ifl: {
     titleKey: "overview.institutions.ifl",
     groups: [
-      { groupKey: "subjects.ifl.english", flagCode: "gb", subjects: [grammar, vocabulary, readings] },
-      { groupKey: "subjects.ifl.chinese", flagCode: "cn", subjects: [grammar, vocabulary, readings] },
-      { groupKey: "subjects.ifl.korean", flagCode: "kr", subjects: [grammar, vocabulary, readings] },
+      { groupKey: "subjects.ifl.english", flagCode: "gb", subjects: [grammar, vocabulary, readings], combinedExam: true },
+      { groupKey: "subjects.ifl.chinese", flagCode: "cn", subjects: [grammar, vocabulary, readings], combinedExam: true },
+      { groupKey: "subjects.ifl.korean", flagCode: "kr", subjects: [grammar, vocabulary, readings], combinedExam: true },
     ],
   },
 };
@@ -105,6 +106,15 @@ export default function SubjectsPage() {
                 />
               );
             })}
+            {group.combinedExam && (
+              <ExamCard
+                title={t("subjects.ifl.entranceExam")}
+                icon={<FileCheck2 className="h-20 w-20 text-emerald-600 dark:text-emerald-400" />}
+                typeLabel={t("subjects.ifl.allLanguages")}
+                questionCount={group.subjects.reduce((sum, s) => sum + s.questionCount, 0)}
+                durationHours={group.subjects.reduce((sum, s) => sum + s.durationHours, 0)}
+              />
+            )}
           </div>
         </section>
       ))}

@@ -26,6 +26,8 @@
   "subjects.ifl.english": "អង់គ្លេស",
   "subjects.ifl.chinese": "ចិន",
   "subjects.ifl.korean": "កូរ៉េ",
+  "subjects.ifl.entranceExam": "ការប្រឡងចូលរៀន",
+  "subjects.ifl.allLanguages": "ការប្រឡងរួមមួយគ្របដណ្តប់លើមុខវិជ្ជាភាសាទាំងអស់",
   "exam.defaultTitle": "ការបែងចែកពិសោធន៍",
   "examType.mcq": "ពហុជ្រើសរើស",
   "exam.questionCount": "{count} សំណួរ",
