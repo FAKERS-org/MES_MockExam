@@ -9,6 +9,7 @@ import {
 import Sidebar from "@/components/shared/sidebar";
 import TopBar from "@/components/shared/top-bar";
 import { NavItem } from "@/components/shared/sidebar";
+import { useTheme } from "@/lib/theme";
 
 const navItems: NavItem[] = [
   { icon: <LayoutGrid className="h-4 w-4" />, label: "ផ្ទាំងព័ត៌មាន", active: true },
@@ -19,13 +20,21 @@ const navItems: NavItem[] = [
 
 const DashboardLayout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { isDark, toggleTheme } = useTheme();
 
   return (
-    <div className="flex min-h-screen bg-slate-50">
+    <div className="flex min-h-screen bg-background">
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} navItems={navItems} />
 
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       <div className="flex min-w-0 flex-1 flex-col">
-        <TopBar onOpenSidebar={() => setSidebarOpen(true)} />
+        <TopBar onOpenSidebar={() => setSidebarOpen(true)} isDark={isDark} onThemeToggle={toggleTheme} />
 
         <main className="flex-1 p-4 md:p-6">
           <Outlet />

@@ -45,16 +45,16 @@ const institutions: Institution[] = [
 
 function ProfileCard() {
   return (
-    <div className="flex items-center gap-4 rounded-xl border bg-white p-5">
+    <div className="flex items-center gap-4 rounded-xl border bg-white p-5 dark:bg-card dark:border-border">
       <Avatar className="h-14 w-14">
         <AvatarImage src="https://i.pravatar.cc/112?img=13" alt="" />
         <AvatarFallback>YA</AvatarFallback>
       </Avatar>
       <div>
-        <p className="text-base font-bold text-slate-900">
+        <p className="text-base font-bold text-slate-900 dark:text-foreground">
           សូមស្វាគមន៍, យាង អូយអឹង
         </p>
-        <p className="text-sm text-slate-500">អភិបាលប្រព័ន្ធ</p>
+        <p className="text-sm text-slate-500 dark:text-muted-foreground">អភិបាលប្រព័ន្ធ</p>
       </div>
     </div>
   );
@@ -62,16 +62,16 @@ function ProfileCard() {
 
 function InstitutionCard({ institution }: { institution: Institution }) {
   return (
-    <button className="flex flex-col items-center rounded-xl border bg-white p-6 text-center transition-shadow hover:shadow-md">
+    <button className="flex flex-col items-center rounded-xl border bg-white p-6 text-center transition-shadow hover:shadow-md dark:bg-card dark:border-border">
       <img
         src={institution.logo}
         alt={institution.name}
         className="mb-4 h-24 w-24 rounded-full object-contain"
       />
-      <p className="mb-2 min-h-[2.75rem] text-sm font-semibold leading-snug text-slate-900">
+      <p className="mb-2 min-h-[2.75rem] text-sm font-semibold leading-snug text-slate-900 dark:text-foreground">
         {institution.name}
       </p>
-      <div className="flex items-center gap-1.5 text-xs text-slate-500">
+      <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-muted-foreground">
         <BookOpen className="h-3.5 w-3.5" />
         <span>{institution.subjectsLabel}</span>
       </div>

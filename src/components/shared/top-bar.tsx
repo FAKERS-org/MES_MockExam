@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Sun, Bell, Menu } from 'lucide-react';
+import { Search, Sun, Moon, Bell, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface TopBarProps {
@@ -10,6 +10,7 @@ interface TopBarProps {
   notificationCount?: number;
   currentLanguage?: string;
   onOpenSidebar?: () => void;
+  isDark?: boolean;
 }
 
 const TopBar: React.FC<TopBarProps> = ({
@@ -20,6 +21,7 @@ const TopBar: React.FC<TopBarProps> = ({
   notificationCount = 5,
   currentLanguage = 'KH',
   onOpenSidebar,
+  isDark = false,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -29,7 +31,7 @@ const TopBar: React.FC<TopBarProps> = ({
   };
 
   return (
-    <header className="flex items-center justify-between w-full px-6 py-3 bg-white">
+    <header className="flex items-center justify-between w-full px-6 py-3 bg-white border-b border-gray-100 dark:bg-card dark:border-border">
       <div className="flex items-center gap-3">
         {onOpenSidebar && (
           <Button
@@ -44,14 +46,14 @@ const TopBar: React.FC<TopBarProps> = ({
         )}
         <div className="relative w-72">
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <Search className="w-5 h-5 text-gray-400" />
+            <Search className="w-5 h-5 text-gray-400 dark:text-muted-foreground" />
           </div>
           <input
             type="text"
             value={searchQuery}
             onChange={handleSearchChange}
             placeholder="Search..."
-            className="w-full py-2.5 pl-10 pr-4 text-sm text-gray-700 bg-gray-100 border-none rounded-xl outline-none placeholder-gray-400 focus:ring-2 focus:ring-blue-500/20 focus:bg-white transition-all"
+            className="w-full py-2.5 pl-10 pr-4 text-sm text-gray-700 bg-gray-100 border-none rounded-xl outline-none placeholder-gray-400 focus:ring-2 focus:ring-blue-500/20 focus:bg-white transition-all dark:bg-muted dark:text-foreground dark:placeholder:text-muted-foreground dark:focus:bg-card"
           />
         </div>
       </div>
@@ -61,7 +63,7 @@ const TopBar: React.FC<TopBarProps> = ({
         {/* Language Selector */}
         <button
           onClick={() => onLanguageChange?.(currentLanguage === 'KH' ? 'EN' : 'KH')}
-          className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+          className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors dark:bg-card dark:text-foreground dark:border-border dark:hover:bg-accent"
         >
           <img
             src="https://flagcdn.com/w40/kh.png"
@@ -69,7 +71,7 @@ const TopBar: React.FC<TopBarProps> = ({
             className="w-5 h-5 rounded-full object-cover"
           />
           <span>{currentLanguage}</span>
-          <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 text-gray-400 dark:text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
         </button>
@@ -77,16 +79,16 @@ const TopBar: React.FC<TopBarProps> = ({
         {/* Theme Toggle */}
         <button
           onClick={onThemeToggle}
-          className="p-2.5 text-gray-500 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+          className="p-2.5 text-gray-500 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors dark:bg-card dark:text-muted-foreground dark:border-border dark:hover:bg-accent dark:hover:text-foreground"
           aria-label="Toggle theme"
         >
-          <Sun className="w-5 h-5" />
+          {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
         </button>
 
         {/* Notifications */}
         <button
           onClick={onNotificationsClick}
-          className="relative p-2.5 text-gray-500 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+          className="relative p-2.5 text-gray-500 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors dark:bg-card dark:text-muted-foreground dark:border-border dark:hover:bg-accent dark:hover:text-foreground"
           aria-label="Notifications"
         >
           <Bell className="w-5 h-5" />
