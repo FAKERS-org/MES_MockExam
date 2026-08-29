@@ -17,7 +17,7 @@ const institutions: Institution[] = [
     id: "itc",
     name: "វិទ្យាស្ថានបច្ចេកវិទ្យាកម្ពុជា",
     subjectsLabel: "៤ មុខវិជ្ជា",
-    logo: "https://upload.wikimedia.org/wikipedia/en/6/6b/Institute_of_Technology_of_Cambodia_logo.png",
+    logo: "/images/ITC-logo.png",
   },
   {
     id: "usha",
@@ -29,7 +29,7 @@ const institutions: Institution[] = [
     id: "rupp",
     name: "សាកលវិទ្យាល័យភូមិន្ទភ្នំពេញ",
     subjectsLabel: "៤ មុខវិជ្ជា",
-    logo: "https://upload.wikimedia.org/wikipedia/en/thumb/e/e6/Royal_University_of_Phnom_Penh_logo.png/220px-Royal_University_of_Phnom_Penh_logo.png",
+    logo: "/images/RUPP-logo.png",
   },
   {
     id: "up",
