@@ -21,6 +21,7 @@
   "subjects.itc.chemistry": "Chemistry",
   "subjects.itc.logic": "Logic",
   "exam.defaultTitle": "Mock Examination",
+  "examType.mcq": "Multiple Choice",
   "exam.questionCount": "{count} questions",
   "exam.durationHours": "{count} hours",
   "exam.start": "Start",

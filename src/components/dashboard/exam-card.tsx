@@ -4,6 +4,8 @@ import { useLanguage } from '@/lib/i18n';
 
 interface ExamCardProps {
   title?: string;
+  icon?: React.ReactNode;
+  typeLabel?: string;
   questionCount?: number;
   durationHours?: number;
   buttonText?: string;
@@ -12,6 +14,8 @@ interface ExamCardProps {
 
 const ExamCard: React.FC<ExamCardProps> = ({
   title,
+  icon,
+  typeLabel,
   questionCount = 30,
   durationHours = 2,
   buttonText,
@@ -23,6 +27,7 @@ const ExamCard: React.FC<ExamCardProps> = ({
       <div style={styles.leftSection}>
         {/* Illustration */}
         <div style={styles.iconWrapper}>
+          {icon ?? (
           <svg
             viewBox="0 0 80 80"
             width="80"
@@ -61,11 +66,13 @@ const ExamCard: React.FC<ExamCardProps> = ({
             <rect x="62" y="68" width="6" height="6" rx="1" fill="#FBBF24" stroke="#374151" strokeWidth="1" />
             <rect x="70" y="68" width="6" height="6" rx="1" fill="#FBBF24" stroke="#374151" strokeWidth="1" />
           </svg>
+          )}
         </div>
 
         {/* Text Content */}
         <div style={styles.textContent}>
           <h3 style={styles.title}>{title ?? t('exam.defaultTitle')}</h3>
+          {typeLabel && <span style={styles.typeBadge}>{typeLabel}</span>}
           <div style={styles.metaRow}>
             <span style={styles.metaItem}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -127,6 +134,17 @@ const styles: Record<string, React.CSSProperties> = {
     fontWeight: 600,
     color: 'var(--card-foreground)',
     lineHeight: 1.3,
+  },
+  typeBadge: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    alignSelf: 'flex-start',
+    padding: '2px 10px',
+    borderRadius: '999px',
+    background: 'var(--accent)',
+    color: 'var(--foreground)',
+    fontSize: '12px',
+    fontWeight: 500,
   },
   metaRow: {
     display: 'flex',

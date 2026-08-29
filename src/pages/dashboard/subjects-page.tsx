@@ -1,12 +1,15 @@
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, FunctionSquare, Atom, FlaskConical, Brain } from "lucide-react";
 import ExamCard from "@/components/dashboard/exam-card";
 import { useLanguage } from "@/lib/i18n";
 import type { TranslationKey } from "@/lib/i18n";
+import type { LucideIcon } from "lucide-react";
 
 interface ExamSubject {
   id: string;
   titleKey: TranslationKey;
+  typeKey: TranslationKey;
+  icon: LucideIcon;
   questionCount: number;
   durationHours: number;
 }
@@ -15,10 +18,10 @@ const subjectsByInstitution: Record<string, { titleKey: TranslationKey; subjects
   itc: {
     titleKey: "overview.institutions.itc",
     subjects: [
-      { id: "math", titleKey: "subjects.itc.math", questionCount: 30, durationHours: 2 },
-      { id: "physics", titleKey: "subjects.itc.physics", questionCount: 30, durationHours: 2 },
-      { id: "chemistry", titleKey: "subjects.itc.chemistry", questionCount: 30, durationHours: 2 },
-      { id: "logic", titleKey: "subjects.itc.logic", questionCount: 30, durationHours: 1 },
+      { id: "math", titleKey: "subjects.itc.math", typeKey: "examType.mcq", icon: FunctionSquare, questionCount: 30, durationHours: 2 },
+      { id: "physics", titleKey: "subjects.itc.physics", typeKey: "examType.mcq", icon: Atom, questionCount: 30, durationHours: 2 },
+      { id: "chemistry", titleKey: "subjects.itc.chemistry", typeKey: "examType.mcq", icon: FlaskConical, questionCount: 30, durationHours: 2 },
+      { id: "logic", titleKey: "subjects.itc.logic", typeKey: "examType.mcq", icon: Brain, questionCount: 30, durationHours: 1 },
     ],
   },
 };
@@ -56,14 +59,19 @@ export default function SubjectsPage() {
       </div>
 
       <div className="flex flex-col gap-4">
-        {data.subjects.map((subject) => (
-          <ExamCard
-            key={subject.id}
-            title={t(subject.titleKey)}
-            questionCount={subject.questionCount}
-            durationHours={subject.durationHours}
-          />
-        ))}
+        {data.subjects.map((subject) => {
+          const Icon = subject.icon;
+          return (
+            <ExamCard
+              key={subject.id}
+              title={t(subject.titleKey)}
+              icon={<Icon className="h-20 w-20 text-slate-600 dark:text-muted-foreground" />}
+              typeLabel={t(subject.typeKey)}
+              questionCount={subject.questionCount}
+              durationHours={subject.durationHours}
+            />
+          );
+        })}
       </div>
     </div>
   );
