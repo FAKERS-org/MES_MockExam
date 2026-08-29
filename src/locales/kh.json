@@ -31,7 +31,8 @@
   "exam.defaultTitle": "ការបែងចែកពិសោធន៍",
   "examType.mcq": "ពហុជ្រើសរើស",
   "exam.questionCount": "{count} សំណួរ",
-  "exam.durationHours": "{count} ម៉ោង",
+  "exam.durationMinutes": "{count} នាទី",
+  "exam.marks": "{count} ពិន្ទុ",
   "exam.start": "ចាប់ផ្តើម",
   "exam.subjectNotFound": "រកមិនឃើញមុខវិជ្ជា",
   "profile.role": "និស្សិតបច្ចេកវិទ្យា"

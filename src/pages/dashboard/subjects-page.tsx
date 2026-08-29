@@ -13,6 +13,7 @@ interface ExamSubject {
   icon: LucideIcon;
   questionCount: number;
   durationMinutes: number;
+  marks?: number;
 }
 
 interface ExamGroup {
@@ -22,9 +23,9 @@ interface ExamGroup {
   combinedExam?: boolean;
 }
 
-const grammar: ExamSubject = { id: "grammar", titleKey: "subjects.ifl.grammar", typeKey: "examType.mcq", icon: Languages, questionCount: 30, durationHours: 1 };
-const vocabulary: ExamSubject = { id: "vocabulary", titleKey: "subjects.ifl.vocabulary", typeKey: "examType.mcq", icon: BookText, questionCount: 30, durationHours: 1 };
-const readings: ExamSubject = { id: "readings", titleKey: "subjects.ifl.readings", typeKey: "examType.mcq", icon: BookOpen, questionCount: 30, durationHours: 2 };
+const grammar: ExamSubject = { id: "grammar", titleKey: "subjects.ifl.grammar", typeKey: "examType.mcq", icon: Languages, questionCount: 30, durationMinutes: 30, marks: 40 };
+const vocabulary: ExamSubject = { id: "vocabulary", titleKey: "subjects.ifl.vocabulary", typeKey: "examType.mcq", icon: BookText, questionCount: 30, durationMinutes: 30, marks: 30 };
+const readings: ExamSubject = { id: "readings", titleKey: "subjects.ifl.readings", typeKey: "examType.mcq", icon: BookOpen, questionCount: 30, durationMinutes: 40, marks: 30 };
 
 const subjectsByInstitution: Record<string, { titleKey: TranslationKey; groups: ExamGroup[] }> = {
   itc: {
@@ -32,10 +33,10 @@ const subjectsByInstitution: Record<string, { titleKey: TranslationKey; groups: 
     groups: [
       {
         subjects: [
-          { id: "math", titleKey: "subjects.itc.math", typeKey: "examType.mcq", icon: FunctionSquare, questionCount: 30, durationHours: 2 },
-          { id: "physics", titleKey: "subjects.itc.physics", typeKey: "examType.mcq", icon: Atom, questionCount: 30, durationHours: 2 },
-          { id: "chemistry", titleKey: "subjects.itc.chemistry", typeKey: "examType.mcq", icon: FlaskConical, questionCount: 30, durationHours: 2 },
-          { id: "logic", titleKey: "subjects.itc.logic", typeKey: "examType.mcq", icon: Brain, questionCount: 30, durationHours: 1 },
+          { id: "math", titleKey: "subjects.itc.math", typeKey: "examType.mcq", icon: FunctionSquare, questionCount: 30, durationMinutes: 120 },
+          { id: "physics", titleKey: "subjects.itc.physics", typeKey: "examType.mcq", icon: Atom, questionCount: 30, durationMinutes: 120 },
+          { id: "chemistry", titleKey: "subjects.itc.chemistry", typeKey: "examType.mcq", icon: FlaskConical, questionCount: 30, durationMinutes: 120 },
+          { id: "logic", titleKey: "subjects.itc.logic", typeKey: "examType.mcq", icon: Brain, questionCount: 30, durationMinutes: 60 },
         ],
       },
     ],
@@ -102,7 +103,8 @@ export default function SubjectsPage() {
                   icon={<Icon className="h-20 w-20 text-slate-600 dark:text-muted-foreground" />}
                   typeLabel={t(subject.typeKey)}
                   questionCount={subject.questionCount}
-                  durationHours={subject.durationHours}
+                  durationMinutes={subject.durationMinutes}
+                  marks={subject.marks}
                 />
               );
             })}
@@ -112,7 +114,8 @@ export default function SubjectsPage() {
                 icon={<FileCheck2 className="h-20 w-20 text-emerald-600 dark:text-emerald-400" />}
                 typeLabel={t("subjects.ifl.allLanguages")}
                 questionCount={group.subjects.reduce((sum, s) => sum + s.questionCount, 0)}
-                durationHours={group.subjects.reduce((sum, s) => sum + s.durationHours, 0)}
+                durationMinutes={group.subjects.reduce((sum, s) => sum + s.durationMinutes, 0)}
+                marks={group.subjects.reduce((sum, s) => sum + (s.marks ?? 0), 0)}
               />
             )}
           </div>

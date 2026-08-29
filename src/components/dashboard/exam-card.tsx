@@ -7,7 +7,8 @@ interface ExamCardProps {
   icon?: React.ReactNode;
   typeLabel?: string;
   questionCount?: number;
-  durationHours?: number;
+  durationMinutes?: number;
+  marks?: number;
   buttonText?: string;
   onStart?: () => void;
 }
@@ -17,7 +18,8 @@ const ExamCard: React.FC<ExamCardProps> = ({
   icon,
   typeLabel,
   questionCount = 30,
-  durationHours = 2,
+  durationMinutes = 120,
+  marks,
   buttonText,
   onStart,
 }) => {
@@ -86,8 +88,16 @@ const ExamCard: React.FC<ExamCardProps> = ({
                 <circle cx="12" cy="12" r="10" />
                 <polyline points="12 6 12 12 16 14" />
               </svg>
-              {t('exam.durationHours', { count: durationHours })}
+              {t('exam.durationMinutes', { count: durationMinutes })}
             </span>
+            {marks != null && (
+              <span style={styles.metaItem}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z" />
+                </svg>
+                {t('exam.marks', { count: marks })}
+              </span>
+            )}
           </div>
         </div>
       </div>
