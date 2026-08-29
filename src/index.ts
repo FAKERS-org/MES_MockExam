@@ -3,6 +3,12 @@ import index from "./index.html";
 
 const server = serve({
   routes: {
+    // Serve static images from the public/images directory.
+    "/images/*": (req) => {
+      const path = new URL(req.url).pathname.slice("/images/".length);
+      return new Response(Bun.file(`./public/images/${path}`));
+    },
+
     // Serve index.html for all unmatched routes.
     "/*": index,
 

@@ -22,13 +22,11 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, navItems }) => {
     >
       {/* Logo */}
       <div className="flex items-center gap-2 px-5 py-6">
-        <div className="flex items-center justify-center w-8 h-8 bg-[#1e88e5] rounded-md text-white font-bold text-lg">
-          M
-        </div>
-        <div className="flex flex-col leading-tight">
-          <span className="text-[#1e88e5] font-bold text-sm tracking-wide">MOCK</span>
-          <span className="text-[#1e88e5] font-bold text-sm tracking-wide">EXAM</span>
-        </div>
+        <img
+          src="/images/MES-logo-horizontal.png"
+          alt="MES Logo"
+          className="h-9 w-auto object-contain"
+        />
       </div>
 
       {/* Navigation */}
