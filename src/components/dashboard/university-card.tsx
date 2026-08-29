@@ -15,7 +15,7 @@ interface UniversityCardProps {
 }
 
 const UniversityCard: React.FC<UniversityCardProps> = ({ uni }) => (
-  <div className="bg-white rounded-xl border border-gray-100 p-6 flex flex-col items-center text-center hover:shadow-md transition-shadow cursor-pointer group dark:bg-card dark:border-border">
+  <div className="bg-white rounded-xl border border-gray-100 p-6 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-shadow cursor-pointer group dark:bg-card dark:border-border">
     <div className="mb-4 transform group-hover:scale-105 transition-transform duration-300">
       {uni.logo}
     </div>

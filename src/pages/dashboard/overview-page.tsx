@@ -45,7 +45,7 @@ const institutions: Institution[] = [
 
 function ProfileCard() {
   return (
-    <div className="flex items-center gap-4 rounded-xl border bg-white p-5 dark:bg-card dark:border-border">
+    <div className="flex items-center gap-4 rounded-xl border bg-white p-5 shadow-sm dark:bg-card dark:border-border">
       <Avatar className="h-14 w-14">
         <AvatarImage src="https://i.pravatar.cc/112?img=13" alt="" />
         <AvatarFallback>YA</AvatarFallback>
@@ -62,7 +62,7 @@ function ProfileCard() {
 
 function InstitutionCard({ institution }: { institution: Institution }) {
   return (
-    <button className="flex flex-col items-center rounded-xl border bg-white p-6 text-center transition-shadow hover:shadow-md dark:bg-card dark:border-border">
+    <button className="flex flex-col items-center rounded-xl border bg-white p-6 text-center shadow-sm transition-shadow hover:shadow-md dark:bg-card dark:border-border">
       <img
         src={institution.logo}
         alt={institution.name}
