@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { BookOpen } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useLanguage, TranslationKey } from "@/lib/i18n";
@@ -45,7 +46,10 @@ function InstitutionCard({ institution }: { institution: Institution }) {
   const { t } = useLanguage();
   const name = t(institution.nameKey);
   return (
-    <button className="flex flex-col items-center rounded-xl border bg-white p-6 text-center shadow-sm transition-shadow hover:shadow-md dark:bg-card dark:border-border">
+    <Link
+      to={`/dashboard/${institution.id}`}
+      className="flex flex-col items-center rounded-xl border bg-white p-6 text-center shadow-sm transition-shadow hover:shadow-md dark:bg-card dark:border-border"
+    >
       <img
         src={institution.logo}
         alt={name}
@@ -58,7 +62,7 @@ function InstitutionCard({ institution }: { institution: Institution }) {
         <BookOpen className="h-3.5 w-3.5" />
         <span>{t("overview.subjectsLabel")}</span>
       </div>
-    </button>
+    </Link>
   );
 }
 

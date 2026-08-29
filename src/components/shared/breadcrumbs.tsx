@@ -8,6 +8,10 @@ const routeLabels: Record<string, TranslationKey> = {
   history: "nav.history",
   info: "nav.info",
   account: "nav.account",
+  itc: "overview.institutions.itc",
+  usha: "overview.institutions.usha",
+  rupp: "overview.institutions.rupp",
+  ifl: "overview.institutions.ifl",
 };
 
 export const Breadcrumbs: React.FC = () => {

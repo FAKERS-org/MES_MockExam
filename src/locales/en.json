@@ -16,5 +16,14 @@
   "overview.institutions.usha": "University of Health Sciences",
   "overview.institutions.rupp": "Royal University of Phnom Penh",
   "overview.institutions.ifl": "Institute of Foreign Languages",
+  "subjects.itc.math": "Mathematics",
+  "subjects.itc.physics": "Physics",
+  "subjects.itc.chemistry": "Chemistry",
+  "subjects.itc.logic": "Logic",
+  "exam.defaultTitle": "Mock Examination",
+  "exam.questionCount": "{count} questions",
+  "exam.durationHours": "{count} hours",
+  "exam.start": "Start",
+  "exam.subjectNotFound": "Subject not found",
   "profile.role": "Technology Student"
 }
