@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, FunctionSquare, Atom, FlaskConical, Brain } from "lucide-react";
+import { ArrowLeft, FunctionSquare, Atom, FlaskConical, Brain, Languages, BookText, BookOpen } from "lucide-react";
 import ExamCard from "@/components/dashboard/exam-card";
 import { useLanguage } from "@/lib/i18n";
 import type { TranslationKey } from "@/lib/i18n";
@@ -22,6 +22,14 @@ const subjectsByInstitution: Record<string, { titleKey: TranslationKey; subjects
       { id: "physics", titleKey: "subjects.itc.physics", typeKey: "examType.mcq", icon: Atom, questionCount: 30, durationHours: 2 },
       { id: "chemistry", titleKey: "subjects.itc.chemistry", typeKey: "examType.mcq", icon: FlaskConical, questionCount: 30, durationHours: 2 },
       { id: "logic", titleKey: "subjects.itc.logic", typeKey: "examType.mcq", icon: Brain, questionCount: 30, durationHours: 1 },
+    ],
+  },
+  ifl: {
+    titleKey: "overview.institutions.ifl",
+    subjects: [
+      { id: "grammar", titleKey: "subjects.ifl.grammar", typeKey: "examType.mcq", icon: Languages, questionCount: 30, durationHours: 1 },
+      { id: "vocabulary", titleKey: "subjects.ifl.vocabulary", typeKey: "examType.mcq", icon: BookText, questionCount: 30, durationHours: 1 },
+      { id: "readings", titleKey: "subjects.ifl.readings", typeKey: "examType.mcq", icon: BookOpen, questionCount: 30, durationHours: 2 },
     ],
   },
 };
