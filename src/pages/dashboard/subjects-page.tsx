@@ -1,59 +1,14 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useMemo, useState } from "react";
-import { ArrowLeft, Search, FunctionSquare, Atom, FlaskConical, Brain, Languages, BookText, BookOpen, FileCheck2 } from "lucide-react";
+import { ArrowLeft, Search, FileCheck2 } from "lucide-react";
 import "flag-icons/css/flag-icons.min.css";
 import ExamCard from "@/components/dashboard/exam-card";
 import { useLanguage } from "@/lib/i18n";
-import type { TranslationKey } from "@/lib/i18n";
-import type { LucideIcon } from "lucide-react";
-
-interface ExamSubject {
-  id: string;
-  titleKey: TranslationKey;
-  typeKey: TranslationKey;
-  icon: LucideIcon;
-  questionCount: number;
-  durationMinutes: number;
-  marks?: number;
-}
-
-interface ExamGroup {
-  groupKey?: TranslationKey;
-  flagCode?: string;
-  subjects: ExamSubject[];
-  combinedExam?: boolean;
-}
-
-const grammar: ExamSubject = { id: "grammar", titleKey: "subjects.ifl.grammar", typeKey: "examType.mcq", icon: Languages, questionCount: 30, durationMinutes: 30, marks: 40 };
-const vocabulary: ExamSubject = { id: "vocabulary", titleKey: "subjects.ifl.vocabulary", typeKey: "examType.mcq", icon: BookText, questionCount: 30, durationMinutes: 30, marks: 30 };
-const readings: ExamSubject = { id: "readings", titleKey: "subjects.ifl.readings", typeKey: "examType.mcq", icon: BookOpen, questionCount: 30, durationMinutes: 40, marks: 30 };
-
-const subjectsByInstitution: Record<string, { titleKey: TranslationKey; groups: ExamGroup[] }> = {
-  itc: {
-    titleKey: "overview.institutions.itc",
-    groups: [
-      {
-        subjects: [
-          { id: "math", titleKey: "subjects.itc.math", typeKey: "examType.mcq", icon: FunctionSquare, questionCount: 30, durationMinutes: 120 },
-          { id: "physics", titleKey: "subjects.itc.physics", typeKey: "examType.mcq", icon: Atom, questionCount: 30, durationMinutes: 120 },
-          { id: "chemistry", titleKey: "subjects.itc.chemistry", typeKey: "examType.mcq", icon: FlaskConical, questionCount: 30, durationMinutes: 120 },
-          { id: "logic", titleKey: "subjects.itc.logic", typeKey: "examType.mcq", icon: Brain, questionCount: 30, durationMinutes: 60 },
-        ],
-      },
-    ],
-  },
-  ifl: {
-    titleKey: "overview.institutions.ifl",
-    groups: [
-      { groupKey: "subjects.ifl.english", flagCode: "gb", subjects: [grammar, vocabulary, readings], combinedExam: true },
-      { groupKey: "subjects.ifl.chinese", flagCode: "cn", subjects: [grammar, vocabulary, readings], combinedExam: true },
-      { groupKey: "subjects.ifl.korean", flagCode: "kr", subjects: [grammar, vocabulary, readings], combinedExam: true },
-    ],
-  },
-};
+import { subjectsByInstitution } from "./subjects-data";
 
 export default function SubjectsPage() {
   const { institution = "" } = useParams();
+  const navigate = useNavigate();
   const { t } = useLanguage();
   const [query, setQuery] = useState("");
   const [langFilter, setLangFilter] = useState<string | null>(null);
@@ -173,6 +128,7 @@ export default function SubjectsPage() {
                   questionCount={subject.questionCount}
                   durationMinutes={subject.durationMinutes}
                   marks={subject.marks}
+                  onStart={() => navigate(`/dashboard/${institution}/${subject.id}/exam-options`)}
                 />
               );
             })}

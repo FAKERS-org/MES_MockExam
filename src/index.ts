@@ -9,6 +9,12 @@ const server = serve({
       return new Response(Bun.file(`./public/images/${path}`));
     },
 
+    // Serve icons from the public/icons directory.
+    "/icons/*": (req) => {
+      const path = new URL(req.url).pathname.slice("/icons/".length);
+      return new Response(Bun.file(`./public/icons/${path}`));
+    },
+
     // Serve index.html for all unmatched routes.
     "/*": index,
 

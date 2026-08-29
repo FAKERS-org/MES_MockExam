@@ -36,5 +36,12 @@
   "exam.marks": "{count} marks",
   "exam.start": "Start",
   "exam.subjectNotFound": "Subject not found",
+  "exam.options.subtitle": "Choose how you would like to take the exam",
+  "exam.options.standard": "Standard Exam",
+  "exam.options.standardDesc": "Take the exam with the full set of questions and time limit",
+  "exam.options.custom": "Custom Exam",
+  "exam.options.customDesc": "Pick a past exam by year to practice with",
+  "exam.options.chooseYear": "Select the year of the past exam",
+  "exam.options.selectedYear": "Selected year: {year}",
   "profile.role": "Technology Student"
 }
