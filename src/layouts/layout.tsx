@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import {
   LayoutGrid,
   History,
@@ -9,23 +9,26 @@ import {
 import Sidebar from "@/components/shared/sidebar";
 import TopBar from "@/components/shared/top-bar";
 import Breadcrumbs from "@/components/shared/breadcrumbs";
-import { NavItem } from "@/components/shared/sidebar";
+import { type NavItem } from "@/components/shared/sidebar";
 import { useTheme } from "@/lib/theme";
 import { useLanguage } from "@/lib/i18n";
 
-const DashboardLayout: React.FC = () => {
+const AppLayout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { isDark, toggleTheme } = useTheme();
   const { t } = useLanguage();
+  const { pathname } = useLocation();
+
+  const isDashboard = pathname === "/" || pathname.startsWith("/dashboard");
 
   const navItems: NavItem[] = useMemo(
     () => [
-      { icon: <LayoutGrid className="h-4 w-4" />, label: t("nav.dashboard"), active: true },
-      { icon: <History className="h-4 w-4" />, label: t("nav.history") },
+      { icon: <LayoutGrid className="h-4 w-4" />, label: t("nav.dashboard"), active: isDashboard, to: "/" },
+      { icon: <History className="h-4 w-4" />, label: t("nav.history"), active: pathname === "/history", to: "/history" },
       { icon: <FileText className="h-4 w-4" />, label: t("nav.info") },
       { icon: <User className="h-4 w-4" />, label: t("nav.account") },
     ],
-    [t]
+    [t, pathname, isDashboard]
   );
 
   return (
@@ -54,4 +57,4 @@ const DashboardLayout: React.FC = () => {
   );
 };
 
-export default DashboardLayout;
+export default AppLayout;

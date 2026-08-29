@@ -22,9 +22,14 @@ export const Breadcrumbs: React.FC = () => {
 
   const segments = pathname.split("/").filter(Boolean);
 
-  const crumbs: Crumb[] = [{ label: t("nav.dashboard"), to: "/dashboard" }];
+  const crumbs: Crumb[] = [];
 
-  if (segments[0] === "dashboard") {
+  if (segments.length === 0) {
+    crumbs.push({ label: t("nav.dashboard") });
+  } else if (segments[0] === "history") {
+    crumbs.push({ label: t("nav.history") });
+  } else if (segments[0] === "dashboard") {
+    crumbs.push({ label: t("nav.dashboard"), to: "/" });
     const institution = segments[1];
     const subjectId = segments[2];
     const action = segments[3];
@@ -61,6 +66,8 @@ export const Breadcrumbs: React.FC = () => {
           crumbs.push({ label: subjectTitle });
         }
       }
+    } else {
+      crumbs.push({ label: t("nav.dashboard") });
     }
   }
 

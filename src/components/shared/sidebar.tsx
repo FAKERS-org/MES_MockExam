@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { LogOut } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
 
@@ -6,6 +7,7 @@ export interface NavItem {
   icon: React.ReactNode;
   label: string;
   active?: boolean;
+  to?: string;
 }
 
 interface SidebarProps {
@@ -16,6 +18,13 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ open, onClose, navItems }) => {
   const { t } = useLanguage();
+  const navigate = useNavigate();
+
+  const handleNav = (item: NavItem) => {
+    if (item.to) {
+      navigate(item.to);
+    }
+  };
 
   return (
     <aside
@@ -39,7 +48,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, navItems }) => {
           return (
             <button
               key={item.label}
-              onClick={onClose}
+              onClick={() => handleNav(item)}
               className={`flex w-full items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                 isActive
                   ? "bg-[#e3f2fd] text-[#1e88e5] dark:bg-blue-500/15 dark:text-blue-400"
