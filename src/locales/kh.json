@@ -44,5 +44,9 @@
   "exam.options.customDesc": "ជ្រើសរើសការប្រឡងឆ្នាំមុនដើម្បីអនុវត្ត",
   "exam.options.chooseYear": "ជ្រើសរើសឆ្នាំនៃការប្រឡងមុន",
   "exam.options.selectedYear": "ឆ្នាំដែលបានជ្រើសរើស៖ {year}",
-  "profile.role": "និស្សិតបច្ចេកវិទ្យា"
+  "profile.role": "និស្សិតបច្ចេកវិទ្យា",
+  "error.title": "៤០៤",
+  "error.heading": "រកទំព័រមិនឃើញ",
+  "error.description": "ទំព័រដែលអ្នកកំពុងស្វែងរកមិនមាន ឬត្រូវបានផ្លាស់ប្តូរទីតាំង។",
+  "error.goHome": "ត្រឡប់ទៅផ្ទាំងព័ត៌មាន"
 }

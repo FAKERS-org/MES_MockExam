@@ -44,5 +44,9 @@
   "exam.options.customDesc": "Pick a past exam by year to practice with",
   "exam.options.chooseYear": "Select the year of the past exam",
   "exam.options.selectedYear": "Selected year: {year}",
-  "profile.role": "Technology Student"
+  "profile.role": "Technology Student",
+  "error.title": "404",
+  "error.heading": "Page not found",
+  "error.description": "The page you are looking for doesn't exist or has been moved.",
+  "error.goHome": "Back to dashboard"
 }
