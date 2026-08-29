@@ -3,6 +3,7 @@
   "nav.history": "Exam History",
   "nav.info": "Information",
   "nav.account": "Account",
+  "breadcrumbs.taking": "Taking Exam",
   "sidebar.logout": "Log out",
   "topbar.searchPlaceholder": "Search...",
   "filter.all": "All",
