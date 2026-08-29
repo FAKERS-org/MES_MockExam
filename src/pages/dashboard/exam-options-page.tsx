@@ -21,13 +21,13 @@ export default function ExamOptionsPage() {
       <div>
         <Link
           to={`/dashboard/${institution}`}
-          className="mb-3 inline-flex items-center gap-1 text-sm text-slate-500 transition-colors hover:text-slate-700 dark:text-muted-foreground dark:hover:text-foreground"
+          className="mb-3 inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
         >
           <ArrowLeft className="h-4 w-4" />
           {t("nav.dashboard")}
         </Link>
-        <h1 className="text-xl font-bold text-slate-900 dark:text-foreground">{subjectTitle}</h1>
-        <p className="mt-1 text-sm text-slate-500 dark:text-muted-foreground">{t("exam.options.subtitle")}</p>
+        <h1 className="text-xl font-bold text-foreground">{subjectTitle}</h1>
+        <p className="mt-1 text-sm text-muted-foreground">{t("exam.options.subtitle")}</p>
       </div>
 
       <div className="flex flex-col gap-4">
@@ -51,10 +51,10 @@ export default function ExamOptionsPage() {
         />
       </div>
 
-      <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-900">
+      <div className="rounded-xl border border-border bg-muted p-4">
         <div className="mb-3 flex items-center gap-2">
-          <BookOpenCheck className="h-4 w-4 text-slate-500 dark:text-muted-foreground" />
-          <p className="text-sm font-medium text-slate-700 dark:text-muted-foreground">{t("exam.options.chooseYear")}</p>
+          <BookOpenCheck className="h-4 w-4 text-muted-foreground" />
+          <p className="text-sm font-medium text-muted-foreground">{t("exam.options.chooseYear")}</p>
         </div>
         <div className="flex flex-wrap gap-2">
           {years.map((year) => (
@@ -64,14 +64,14 @@ export default function ExamOptionsPage() {
               className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
                 selectedYear === year
                   ? "bg-blue-600 text-white"
-                  : "bg-slate-200 text-slate-700 hover:bg-slate-300 dark:bg-slate-800 dark:text-muted-foreground dark:hover:bg-slate-700"
+                  : "bg-secondary text-secondary-foreground hover:bg-muted-foreground/20"
               }`}
             >
               {year}
             </button>
           ))}
         </div>
-        <p className="mt-3 text-xs text-slate-400 dark:text-muted-foreground">{t("exam.options.selectedYear", { year: selectedYear || "-" })}</p>
+        <p className="mt-3 text-xs text-muted-foreground">{t("exam.options.selectedYear", { year: selectedYear || "-" })}</p>
       </div>
     </div>
   );
