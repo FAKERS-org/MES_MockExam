@@ -16,8 +16,8 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ open, onClose, navItems }) => {
   return (
     <aside
-      className={`fixed inset-y-0 left-0 z-50 flex h-screen w-64 flex-col bg-white border-r border-gray-100 dark:bg-card dark:border-border transition-transform lg:static lg:translate-x-0 ${
-        open ? "translate-x-0" : "-translate-x-full"
+      className={`fixed inset-y-0 left-0 z-50 flex h-screen w-64 flex-col bg-white border-r border-gray-100 dark:bg-card dark:border-border transition-all lg:static lg:translate-x-0 lg:overflow-hidden ${
+        open ? "translate-x-0 w-full sm:w-64" : "-translate-x-full w-64 lg:w-0"
       }`}
     >
       {/* Logo */}

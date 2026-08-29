@@ -37,7 +37,7 @@ const TopBar: React.FC<TopBarProps> = ({
           <Button
             variant="ghost"
             size="icon"
-            className="shrink-0 md:hidden"
+            className="shrink-0"
             onClick={onOpenSidebar}
             aria-label="Open menu"
           >

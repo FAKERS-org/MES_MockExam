@@ -35,7 +35,7 @@ const DashboardLayout: React.FC = () => {
 
       <div className="flex min-w-0 flex-1 flex-col bg-slate-50 dark:bg-background">
         <main className="flex flex-1 flex-col gap-4 p-4 md:p-6">
-          <TopBar onOpenSidebar={() => setSidebarOpen(true)} isDark={isDark} onThemeToggle={toggleTheme} />
+          <TopBar onOpenSidebar={() => setSidebarOpen((o) => !o)} isDark={isDark} onThemeToggle={toggleTheme} />
 
           <div className="flex-1">
             <Outlet />
