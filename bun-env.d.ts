@@ -17,3 +17,8 @@ declare module "*.module.css" {
   const classes: { readonly [key: string]: string };
   export = classes;
 }
+
+declare module "*.json" {
+  const value: { readonly [key: string]: string };
+  export default value;
+}

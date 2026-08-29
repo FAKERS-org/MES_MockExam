@@ -1,5 +1,6 @@
 import { BookOpen } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useLanguage, TranslationKey } from "@/lib/i18n";
 
 // ---------------------------------------------------------------------------
 // Mock data
@@ -7,36 +8,15 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface Institution {
   id: string;
-  name: string;
-  subjectsLabel: string;
+  nameKey: TranslationKey;
   logo: string;
 }
 
 const institutions: Institution[] = [
-  {
-    id: "itc",
-    name: "វិទ្យាស្ថានបច្ចេកវិទ្យាកម្ពុជា",
-    subjectsLabel: "៤ មុខវិជ្ជា",
-    logo: "/images/ITC-logo.png",
-  },
-  {
-    id: "usha",
-    name: "សាកលវិទ្យាល័យវិទ្យាសាស្ត្រសុខាភិបាល",
-    subjectsLabel: "៤ មុខវិជ្ជា",
-    logo: "/images/UHS-logo.png",
-  },
-  {
-    id: "rupp",
-    name: "សាកលវិទ្យាល័យភូមិន្ទភ្នំពេញ",
-    subjectsLabel: "៤ មុខវិជ្ជា",
-    logo: "/images/RUPP-logo.png",
-  },
-  {
-    id: "ifl",
-    name: "វិទ្យាស្ថានភាសាបរទេស",
-    subjectsLabel: "៤ មុខវិជ្ជា",
-    logo: "/images/IFL-logo.png",
-  },
+  { id: "itc", nameKey: "overview.institutions.itc", logo: "/images/ITC-logo.png" },
+  { id: "usha", nameKey: "overview.institutions.usha", logo: "/images/UHS-logo.png" },
+  { id: "rupp", nameKey: "overview.institutions.rupp", logo: "/images/RUPP-logo.png" },
+  { id: "ifl", nameKey: "overview.institutions.ifl", logo: "/images/IFL-logo.png" },
 ];
 
 // ---------------------------------------------------------------------------
@@ -44,6 +24,7 @@ const institutions: Institution[] = [
 // ---------------------------------------------------------------------------
 
 function ProfileCard() {
+  const { t } = useLanguage();
   return (
     <div className="flex items-center gap-4 rounded-xl border bg-white p-5 shadow-sm dark:bg-card dark:border-border">
       <Avatar className="h-14 w-14">
@@ -52,28 +33,30 @@ function ProfileCard() {
       </Avatar>
       <div>
         <p className="text-base font-bold text-slate-900 dark:text-foreground">
-          សូមស្វាគមន៍, យាង អូយអឹង
+          {t("overview.welcome", { name: "យាង អូយអឹង" })}
         </p>
-        <p className="text-sm text-slate-500 dark:text-muted-foreground">អភិបាលប្រព័ន្ធ</p>
+        <p className="text-sm text-slate-500 dark:text-muted-foreground">{t("overview.role")}</p>
       </div>
     </div>
   );
 }
 
 function InstitutionCard({ institution }: { institution: Institution }) {
+  const { t } = useLanguage();
+  const name = t(institution.nameKey);
   return (
     <button className="flex flex-col items-center rounded-xl border bg-white p-6 text-center shadow-sm transition-shadow hover:shadow-md dark:bg-card dark:border-border">
       <img
         src={institution.logo}
-        alt={institution.name}
+        alt={name}
         className="mb-4 h-24 w-24 rounded-full object-contain"
       />
       <p className="mb-2 min-h-[2.75rem] text-sm font-semibold leading-snug text-slate-900 dark:text-foreground">
-        {institution.name}
+        {name}
       </p>
       <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-muted-foreground">
         <BookOpen className="h-3.5 w-3.5" />
-        <span>{institution.subjectsLabel}</span>
+        <span>{t("overview.subjectsLabel")}</span>
       </div>
     </button>
   );

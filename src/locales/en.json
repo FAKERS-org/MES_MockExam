@@ -1,0 +1,20 @@
+{
+  "nav.dashboard": "Dashboard",
+  "nav.history": "Exam History",
+  "nav.info": "Information",
+  "nav.account": "Account",
+  "sidebar.logout": "Log out",
+  "topbar.searchPlaceholder": "Search...",
+  "topbar.toggleMenu": "Toggle menu",
+  "lang.kh": "Khmer",
+  "lang.en": "English",
+  "overview.welcome": "Welcome, {name}",
+  "overview.role": "System Administrator",
+  "overview.subjects": "{count} subjects",
+  "overview.subjectsLabel": "4 subjects",
+  "overview.institutions.itc": "Institute of Technology of Cambodia",
+  "overview.institutions.usha": "University of Health Sciences",
+  "overview.institutions.rupp": "Royal University of Phnom Penh",
+  "overview.institutions.ifl": "Institute of Foreign Languages",
+  "profile.role": "Technology Student"
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import { LogOut } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 export interface NavItem {
   icon: React.ReactNode;
@@ -14,6 +15,8 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ open, onClose, navItems }) => {
+  const { t } = useLanguage();
+
   return (
     <aside
       className={`fixed inset-y-0 left-0 z-50 flex h-screen w-64 flex-col bg-white border-r border-gray-100 dark:bg-card dark:border-border transition-all lg:static lg:translate-x-0 lg:overflow-hidden ${
@@ -57,7 +60,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, navItems }) => {
           className="flex w-full items-center gap-3 px-4 py-2.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-50 text-sm font-medium transition-colors dark:text-muted-foreground dark:hover:text-foreground dark:hover:bg-accent"
         >
           <LogOut className="h-5 w-5" />
-          <span>ចាកចេញ</span>
+          <span>{t("sidebar.logout")}</span>
         </button>
       </div>
     </aside>

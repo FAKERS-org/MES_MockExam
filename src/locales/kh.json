@@ -1,0 +1,20 @@
+{
+  "nav.dashboard": "ផ្ទាំងព័ត៌មាន",
+  "nav.history": "ប្រវត្តិការប្រឡង",
+  "nav.info": "ព័ត៌មាន",
+  "nav.account": "គណនី",
+  "sidebar.logout": "ចាកចេញ",
+  "topbar.searchPlaceholder": "ស្វែងរក...",
+  "topbar.toggleMenu": "ប្តូរម៉ឺនុយ",
+  "lang.kh": "ភាសាខ្មែរ",
+  "lang.en": "English",
+  "overview.welcome": "សូមស្វាគមន៍, {name}",
+  "overview.role": "អភិបាលប្រព័ន្ធ",
+  "overview.subjects": "{count} មុខ",
+  "overview.subjectsLabel": "៤ មុខវិជ្ជា",
+  "overview.institutions.itc": "វិទ្យាស្ថានបច្ចេកវិទ្យាកម្ពុជា",
+  "overview.institutions.usha": "សាកលវិទ្យាល័យវិទ្យាសាស្ត្រសុខាភិបាល",
+  "overview.institutions.rupp": "សាកលវិទ្យាល័យភូមិន្ទភ្នំពេញ",
+  "overview.institutions.ifl": "វិទ្យាស្ថានភាសាបរទេស",
+  "profile.role": "និស្សិតបច្ចេកវិទ្យា"
+}

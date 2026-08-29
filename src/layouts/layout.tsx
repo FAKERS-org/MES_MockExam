@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Outlet } from "react-router-dom";
 import {
   LayoutGrid,
@@ -10,17 +10,22 @@ import Sidebar from "@/components/shared/sidebar";
 import TopBar from "@/components/shared/top-bar";
 import { NavItem } from "@/components/shared/sidebar";
 import { useTheme } from "@/lib/theme";
-
-const navItems: NavItem[] = [
-  { icon: <LayoutGrid className="h-4 w-4" />, label: "ផ្ទាំងព័ត៌មាន", active: true },
-  { icon: <History className="h-4 w-4" />, label: "ប្រវត្តិការប្រឡង" },
-  { icon: <FileText className="h-4 w-4" />, label: "ព័ត៌មាន" },
-  { icon: <User className="h-4 w-4" />, label: "គណនី" },
-];
+import { useLanguage } from "@/lib/i18n";
 
 const DashboardLayout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { isDark, toggleTheme } = useTheme();
+  const { t } = useLanguage();
+
+  const navItems: NavItem[] = useMemo(
+    () => [
+      { icon: <LayoutGrid className="h-4 w-4" />, label: t("nav.dashboard"), active: true },
+      { icon: <History className="h-4 w-4" />, label: t("nav.history") },
+      { icon: <FileText className="h-4 w-4" />, label: t("nav.info") },
+      { icon: <User className="h-4 w-4" />, label: t("nav.account") },
+    ],
+    [t]
+  );
 
   return (
     <div className="flex min-h-screen bg-background">

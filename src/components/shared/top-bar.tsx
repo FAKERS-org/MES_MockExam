@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
-import { Search, Sun, Moon, Bell, Menu } from 'lucide-react';
+import { Search, Sun, Moon, Bell, Menu, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { useLanguage } from '@/lib/i18n';
 
 interface TopBarProps {
   onSearch?: (query: string) => void;
@@ -8,7 +16,6 @@ interface TopBarProps {
   onThemeToggle?: () => void;
   onNotificationsClick?: () => void;
   notificationCount?: number;
-  currentLanguage?: string;
   onOpenSidebar?: () => void;
   isDark?: boolean;
 }
@@ -19,15 +26,21 @@ const TopBar: React.FC<TopBarProps> = ({
   onThemeToggle,
   onNotificationsClick,
   notificationCount = 5,
-  currentLanguage = 'KH',
   onOpenSidebar,
   isDark = false,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const { lang, setLang, t } = useLanguage();
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
     onSearch?.(e.target.value);
+  };
+
+  const handleLanguageChange = (value: string) => {
+    const next = value === 'en' ? 'en' : 'kh';
+    setLang(next);
+    onLanguageChange?.(next);
   };
 
   return (
@@ -39,7 +52,7 @@ const TopBar: React.FC<TopBarProps> = ({
             size="icon"
             className="shrink-0"
             onClick={onOpenSidebar}
-            aria-label="Open menu"
+            aria-label={t('topbar.toggleMenu')}
           >
             <Menu className="h-5 w-5" />
           </Button>
@@ -52,7 +65,7 @@ const TopBar: React.FC<TopBarProps> = ({
             type="text"
             value={searchQuery}
             onChange={handleSearchChange}
-            placeholder="Search..."
+            placeholder={t('topbar.searchPlaceholder')}
             className="w-full py-2.5 pl-10 pr-4 text-sm text-gray-700 bg-gray-100 border-none rounded-xl outline-none placeholder-gray-400 focus:ring-2 focus:ring-blue-500/20 focus:bg-white transition-all dark:bg-muted dark:text-foreground dark:placeholder:text-muted-foreground dark:focus:bg-card"
           />
         </div>
@@ -61,20 +74,42 @@ const TopBar: React.FC<TopBarProps> = ({
       {/* Right Actions */}
       <div className="flex items-center gap-3">
         {/* Language Selector */}
-        <button
-          onClick={() => onLanguageChange?.(currentLanguage === 'KH' ? 'EN' : 'KH')}
-          className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100 transition-colors dark:text-foreground dark:hover:bg-accent"
-        >
-          <img
-            src="https://flagcdn.com/w40/kh.png"
-            alt="Cambodia"
-            className="w-5 h-5 rounded-full object-cover"
-          />
-          <span>{currentLanguage}</span>
-          <svg className="w-4 h-4 text-gray-400 dark:text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button
+              className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100 transition-colors dark:text-foreground dark:hover:bg-accent"
+              aria-label="Select language"
+            >
+              <img
+                src={lang === 'kh' ? 'https://flagcdn.com/w40/kh.png' : 'https://flagcdn.com/w40/gb.png'}
+                alt=""
+                className="w-5 h-5 rounded-full object-cover"
+              />
+              <span>{lang.toUpperCase()}</span>
+              <ChevronDown className="w-4 h-4 text-gray-400 dark:text-muted-foreground" />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuRadioGroup value={lang} onValueChange={handleLanguageChange}>
+              <DropdownMenuRadioItem value="kh">
+                <img
+                  src="https://flagcdn.com/w40/kh.png"
+                  alt=""
+                  className="w-4 h-4 rounded-full object-cover"
+                />
+                {t('lang.kh')}
+              </DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="en">
+                <img
+                  src="https://flagcdn.com/w40/gb.png"
+                  alt=""
+                  className="w-4 h-4 rounded-full object-cover"
+                />
+                {t('lang.en')}
+              </DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
 
         {/* Theme Toggle */}
         <button
