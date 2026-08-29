@@ -31,7 +31,7 @@ const TopBar: React.FC<TopBarProps> = ({
   };
 
   return (
-    <header className="flex items-center justify-between w-full px-6 py-3 bg-white border-b border-gray-100 dark:bg-card dark:border-border">
+    <header className="flex items-center justify-between w-full px-6 py-3 bg-white rounded-xl border border-gray-100 shadow-sm dark:bg-card dark:border-border">
       <div className="flex items-center gap-3">
         {onOpenSidebar && (
           <Button
@@ -44,7 +44,7 @@ const TopBar: React.FC<TopBarProps> = ({
             <Menu className="h-5 w-5" />
           </Button>
         )}
-        <div className="relative w-72">
+        <div className="relative w-40 sm:w-72">
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
             <Search className="w-5 h-5 text-gray-400 dark:text-muted-foreground" />
           </div>
@@ -63,7 +63,7 @@ const TopBar: React.FC<TopBarProps> = ({
         {/* Language Selector */}
         <button
           onClick={() => onLanguageChange?.(currentLanguage === 'KH' ? 'EN' : 'KH')}
-          className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors dark:bg-card dark:text-foreground dark:border-border dark:hover:bg-accent"
+          className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100 transition-colors dark:text-foreground dark:hover:bg-accent"
         >
           <img
             src="https://flagcdn.com/w40/kh.png"
@@ -79,7 +79,7 @@ const TopBar: React.FC<TopBarProps> = ({
         {/* Theme Toggle */}
         <button
           onClick={onThemeToggle}
-          className="p-2.5 text-gray-500 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors dark:bg-card dark:text-muted-foreground dark:border-border dark:hover:bg-accent dark:hover:text-foreground"
+          className="p-2.5 text-gray-500 rounded-md hover:bg-gray-100 transition-colors dark:text-muted-foreground dark:hover:bg-accent dark:hover:text-foreground"
           aria-label="Toggle theme"
         >
           {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
@@ -88,7 +88,7 @@ const TopBar: React.FC<TopBarProps> = ({
         {/* Notifications */}
         <button
           onClick={onNotificationsClick}
-          className="relative p-2.5 text-gray-500 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors dark:bg-card dark:text-muted-foreground dark:border-border dark:hover:bg-accent dark:hover:text-foreground"
+          className="relative p-2.5 text-gray-500 rounded-md hover:bg-gray-100 transition-colors dark:text-muted-foreground dark:hover:bg-accent dark:hover:text-foreground"
           aria-label="Notifications"
         >
           <Bell className="w-5 h-5" />
