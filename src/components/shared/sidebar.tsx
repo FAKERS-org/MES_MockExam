@@ -21,11 +21,11 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, navItems }) => {
       }`}
     >
       {/* Logo */}
-      <div className="flex items-center gap-2 px-5 py-6">
+      <div className="flex items-center justify-center px-5 py-6">
         <img
           src="/images/MES-logo-horizontal.png"
           alt="MES Logo"
-          className="h-9 w-auto object-contain"
+          className="h-7 w-auto object-contain"
         />
       </div>
 

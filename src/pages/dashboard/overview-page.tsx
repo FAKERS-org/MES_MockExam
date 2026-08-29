@@ -23,7 +23,7 @@ const institutions: Institution[] = [
     id: "usha",
     name: "សាកលវិទ្យាល័យវិទ្យាសាស្ត្រសុខាភិបាល",
     subjectsLabel: "៤ មុខវិជ្ជា",
-    logo: "https://upload.wikimedia.org/wikipedia/en/thumb/1/1e/University_of_Health_Sciences_Cambodia_logo.png/220px-University_of_Health_Sciences_Cambodia_logo.png",
+    logo: "/images/UHS-logo.png",
   },
   {
     id: "rupp",
@@ -32,10 +32,10 @@ const institutions: Institution[] = [
     logo: "/images/RUPP-logo.png",
   },
   {
-    id: "up",
-    name: "សាកលវិទ្យាល័យពុទ្ធិសាស្ត្រ (UP)",
+    id: "ifl",
+    name: "វិទ្យាស្ថានភាសាបរទេស",
     subjectsLabel: "៤ មុខវិជ្ជា",
-    logo: "https://placehold.co/96x96/1e3a8a/ffd700?text=UP",
+    logo: "/images/IFL-logo.png",
   },
 ];
 
