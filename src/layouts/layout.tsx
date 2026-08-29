@@ -29,7 +29,7 @@ const DashboardLayout: React.FC = () => {
   );
 
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className="flex h-screen overflow-hidden bg-background">
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} navItems={navItems} />
 
       {sidebarOpen && (
@@ -40,7 +40,7 @@ const DashboardLayout: React.FC = () => {
       )}
 
       <div className="flex min-w-0 flex-1 flex-col bg-slate-50 dark:bg-background">
-        <main className="flex flex-1 flex-col gap-4 p-4 md:p-6">
+        <main className="flex h-screen flex-1 flex-col gap-4 overflow-y-auto p-4 md:p-6">
           <TopBar onOpenSidebar={() => setSidebarOpen((o) => !o)} isDark={isDark} onThemeToggle={toggleTheme} />
 
           <Breadcrumbs />
