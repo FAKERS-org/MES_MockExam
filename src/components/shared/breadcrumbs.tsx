@@ -54,7 +54,7 @@ export const Breadcrumbs: React.FC = () => {
         if (action === "take") {
           crumbs.push({
             label: subjectTitle,
-            to: `/dashboard/${institution}/${subjectId}/exam-options`,
+            to: `/dashboard/${institution}/${subjectId}`,
           });
           crumbs.push({ label: t("breadcrumbs.taking") });
         } else {

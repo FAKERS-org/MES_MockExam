@@ -16,7 +16,7 @@ export function App() {
       <Route path="/dashboard" element={<DashboardLayout />}>
         <Route index element={<DashboardOverviewPage />} />
         <Route path=":institution" element={<SubjectsPage />} />
-        <Route path=":institution/:subjectId/exam-options" element={<ExamOptionsPage />} />
+        <Route path=":institution/:subjectId" element={<ExamOptionsPage />} />
         <Route path=":institution/:subjectId/take" element={<div>Standard Exam placeholder</div>} />
       </Route>
     </Routes>

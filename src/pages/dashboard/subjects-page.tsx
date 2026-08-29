@@ -128,7 +128,7 @@ export default function SubjectsPage() {
                   questionCount={subject.questionCount}
                   durationMinutes={subject.durationMinutes}
                   marks={subject.marks}
-                  onStart={() => navigate(`/dashboard/${institution}/${subject.id}/exam-options`)}
+                  onStart={() => navigate(`/dashboard/${institution}/${subject.id}`)}
                 />
               );
             })}
