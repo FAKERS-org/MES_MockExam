@@ -44,10 +44,10 @@ const examData = [
 ];
 
 const badgeStyles = {
-  blue:   'bg-blue-50 border-blue-200 text-blue-600',
-  orange: 'bg-orange-50 border-orange-200 text-orange-600',
-  indigo: 'bg-indigo-50 border-indigo-200 text-indigo-600',
-  amber:  'bg-amber-50 border-amber-200 text-amber-700',
+  blue:   'bg-blue-50 border-blue-200 text-blue-600 dark:bg-blue-950 dark:border-blue-900 dark:text-blue-300',
+  orange: 'bg-orange-50 border-orange-200 text-orange-600 dark:bg-orange-950 dark:border-orange-900 dark:text-orange-300',
+  indigo: 'bg-indigo-50 border-indigo-200 text-indigo-600 dark:bg-indigo-950 dark:border-indigo-900 dark:text-indigo-300',
+  amber:  'bg-amber-50 border-amber-200 text-amber-700 dark:bg-amber-950 dark:border-amber-900 dark:text-amber-300',
 };
 
 const instituteLogos: Record<string, string> = {
@@ -110,14 +110,14 @@ export default function ExamResultsTable() {
   );
 
   return (
-    <div className="space-y-4 font-sans text-gray-700">
+    <div className="space-y-4 font-sans text-foreground">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full border border-gray-100 bg-gray-50 flex items-center justify-center text-gray-500">
+          <div className="w-8 h-8 rounded-full border border-border bg-muted flex items-center justify-center text-muted-foreground">
             <HomeIcon />
           </div>
-          <h1 className="text-lg font-medium text-gray-700">មើលពិន្ទុ</h1>
+          <h1 className="text-lg font-medium text-foreground">មើលពិន្ទុ</h1>
         </div>
 
         <div className="relative">
@@ -126,19 +126,19 @@ export default function ExamResultsTable() {
             placeholder="ស្វែងរក"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-100 w-56"
+            className="pl-9 pr-4 py-2 border border-input bg-background rounded-lg text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring w-56"
           />
-          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
             <SearchIcon />
           </div>
         </div>
       </div>
 
       {/* Table */}
-      <div className="border border-gray-200 rounded-lg overflow-hidden bg-white">
+      <div className="border border-border rounded-lg overflow-hidden bg-card">
         <table className="w-full text-sm">
           <thead>
-            <tr className="bg-gray-50 border-b border-gray-200 text-gray-600 text-left">
+            <tr className="bg-muted/50 border-b border-border text-muted-foreground text-left">
               <th className="py-3 px-4 font-medium w-12">ល.រ</th>
               <th className="py-3 px-4 font-medium">ឈ្មោះសាលា</th>
               <th className="py-3 px-4 font-medium">មុខវិជ្ជា</th>
@@ -152,25 +152,25 @@ export default function ExamResultsTable() {
             {filtered.map((row, index) => (
               <tr
                 key={row.id}
-                className="border-b border-gray-100 last:border-b-0 hover:bg-gray-50 transition-colors"
+                className="border-b border-border last:border-b-0 hover:bg-muted/50 transition-colors"
               >
-                <td className="py-3 px-4 text-gray-500">{index + 1}</td>
+                <td className="py-3 px-4 text-muted-foreground">{index + 1}</td>
                 <td className="py-3 px-4">
                   <div className="flex items-center gap-3">
                     <img
                       src={instituteLogos[row.shortName]}
                       alt={row.school}
-                      className="w-8 h-8 rounded-full object-contain border border-gray-100"
+                      className="w-8 h-8 rounded-full object-contain border border-border"
                     />
-                    <span>{row.school}</span>
+                    <span className="text-foreground">{row.school}</span>
                   </div>
                 </td>
-                <td className="py-3 px-4">{row.subject}</td>
-                <td className="py-3 px-4">{row.score}</td>
-                <td className="py-3 px-4">{row.duration}</td>
-                <td className="py-3 px-4">{row.date}</td>
+                <td className="py-3 px-4 text-foreground">{row.subject}</td>
+                <td className="py-3 px-4 text-foreground">{row.score}</td>
+                <td className="py-3 px-4 text-foreground">{row.duration}</td>
+                <td className="py-3 px-4 text-foreground">{row.date}</td>
                 <td className="py-3 px-4">
-                  <button className="text-gray-400 hover:text-gray-600 transition-colors">
+                  <button className="text-muted-foreground hover:text-foreground transition-colors">
                     <MoreIcon />
                   </button>
                 </td>
@@ -178,7 +178,7 @@ export default function ExamResultsTable() {
             ))}
             {filtered.length === 0 && (
               <tr>
-                <td colSpan={7} className="py-8 text-center text-gray-400">
+                <td colSpan={7} className="py-8 text-center text-muted-foreground">
                   មិនមានទិន្នន័យ
                 </td>
               </tr>
@@ -188,24 +188,24 @@ export default function ExamResultsTable() {
       </div>
 
       {/* Pagination */}
-      <div className="flex items-center justify-end gap-4 mt-4 text-sm text-gray-600">
-        <select className="border border-gray-200 rounded px-2 py-1 text-sm focus:outline-none">
+      <div className="flex items-center justify-end gap-4 mt-4 text-sm text-muted-foreground">
+        <select className="border border-input bg-background text-foreground rounded px-2 py-1 text-sm focus:outline-none">
           <option>10</option>
           <option>20</option>
           <option>50</option>
         </select>
         <span>1 - 10 of 1000</span>
         <div className="flex items-center gap-1">
-          <button className="p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded transition-colors">
+          <button className="p-1.5 text-muted-foreground hover:text-foreground hover:bg-accent rounded transition-colors">
             <FirstPageIcon />
           </button>
-          <button className="p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded transition-colors">
+          <button className="p-1.5 text-muted-foreground hover:text-foreground hover:bg-accent rounded transition-colors">
             <PrevIcon />
           </button>
-          <button className="p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded transition-colors">
+          <button className="p-1.5 text-muted-foreground hover:text-foreground hover:bg-accent rounded transition-colors">
             <NextIcon />
           </button>
-          <button className="p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded transition-colors">
+          <button className="p-1.5 text-muted-foreground hover:text-foreground hover:bg-accent rounded transition-colors">
             <LastPageIcon />
           </button>
         </div>
