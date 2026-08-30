@@ -1,6 +1,7 @@
 import { Atom, BookOpen, BookText, Brain, FlaskConical, FunctionSquare, Languages } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { TranslationKey } from "@/lib/i18n";
+import { institutions } from "@/data/institutions";
 
 export interface ExamSubject {
   id: string;
@@ -84,4 +85,12 @@ export function findSubject(
     if (subject) return { subject, group };
   }
   return null;
+}
+
+export const supportedInstitutions = institutions.filter((i) => i.id in subjectsByInstitution);
+
+export function getSubjectCount(institutionId: string): number {
+  const data = subjectsByInstitution[institutionId];
+  if (!data) return 0;
+  return data.groups.reduce((sum, group) => sum + group.subjects.length, 0);
 }

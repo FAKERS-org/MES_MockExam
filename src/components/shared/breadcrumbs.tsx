@@ -21,6 +21,8 @@ function Breadcrumbs() {
     crumbs.push({ label: t("nav.dashboard") });
   } else if (segments[0] === "history") {
     crumbs.push({ label: t("nav.history") });
+  } else if (segments[0] === "info") {
+    crumbs.push({ label: t("nav.info") });
   } else if (segments[0] === "dashboard") {
     crumbs.push({ label: t("nav.dashboard"), to: "/" });
     const [institution, subjectId, action] = segments.slice(1);
