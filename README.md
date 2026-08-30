@@ -1,21 +1,39 @@
-# bun-react-tailwind-shadcn-template
+# MES Mock Exam
 
-To install dependencies:
+Mock exam site for Cambodian university entrance exams (ITC, UHS, RUPP, IFL).
+
+Built with Bun, React 19, React Router 7, Tailwind CSS 4, and shadcn/ui.
+
+## Setup
 
 ```bash
 bun install
 ```
 
-To start a development server:
+## Development
+
+Starts a server with hot reloading:
 
 ```bash
-bun dev
+bun run dev
 ```
 
-To run for production:
+## Production
 
 ```bash
-bun start
+bun run build   # bundles the app into dist/
+bun start       # serves the app without hot reloading
 ```
 
-This project was created using `bun init` in bun v1.3.13. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+## Project layout
+
+- `src/index.ts` — Bun HTTP server (static files + API stubs)
+- `src/frontend.tsx` — React entry point
+- `src/App.tsx` — routes
+- `src/pages/` — route-level pages
+- `src/components/` — shared, dashboard, history, and shadcn/ui primitives
+- `src/data/` — institutions and exam subjects
+- `src/lib/` — i18n, theme, and utility helpers
+- `src/locales/` — Khmer/English strings (keep key parity between the two)
+- `public/` — static images and icons
+- `styles/` — Tailwind entry points and design tokens

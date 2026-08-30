@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, BookOpenCheck } from "lucide-react";
 import ExamOptionCard from "@/components/dashboard/exam-option-card";
 import { useLanguage } from "@/lib/i18n";
-import { findSubject } from "./subjects-data";
+import { findSubject } from "@/data/subjects";
 
 const years = ["2023", "2022", "2021", "2020"];
 
@@ -71,7 +71,17 @@ export default function ExamOptionsPage() {
             </button>
           ))}
         </div>
-        <p className="mt-3 text-xs text-muted-foreground">{t("exam.options.selectedYear", { year: selectedYear || "-" })}</p>
+        <div className="mt-3 flex items-center gap-3">
+          <p className="text-xs text-muted-foreground">{t("exam.options.selectedYear", { year: selectedYear || "-" })}</p>
+          {selectedYear && (
+            <button
+              onClick={() => navigate(`/dashboard/${institution}/${subjectId}/take`)}
+              className="rounded-full bg-primary px-4 py-1.5 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+              {t("exam.start")}
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

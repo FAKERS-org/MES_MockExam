@@ -1,6 +1,6 @@
-import { FunctionSquare, Atom, FlaskConical, Brain, Languages, BookText, BookOpen } from "lucide-react";
-import type { TranslationKey } from "@/lib/i18n";
+import { Atom, BookOpen, BookText, Brain, FlaskConical, FunctionSquare, Languages } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import type { TranslationKey } from "@/lib/i18n";
 
 export interface ExamSubject {
   id: string;
@@ -19,9 +19,35 @@ export interface ExamGroup {
   combinedExam?: boolean;
 }
 
-export const grammar: ExamSubject = { id: "grammar", titleKey: "subjects.ifl.grammar", typeKey: "examType.mcq", icon: Languages, questionCount: 30, durationMinutes: 30, marks: 40 };
-export const vocabulary: ExamSubject = { id: "vocabulary", titleKey: "subjects.ifl.vocabulary", typeKey: "examType.mcq", icon: BookText, questionCount: 30, durationMinutes: 30, marks: 30 };
-export const readings: ExamSubject = { id: "readings", titleKey: "subjects.ifl.readings", typeKey: "examType.mcq", icon: BookOpen, questionCount: 30, durationMinutes: 40, marks: 30 };
+const grammar: ExamSubject = {
+  id: "grammar",
+  titleKey: "subjects.ifl.grammar",
+  typeKey: "examType.mcq",
+  icon: Languages,
+  questionCount: 30,
+  durationMinutes: 30,
+  marks: 40,
+};
+
+const vocabulary: ExamSubject = {
+  id: "vocabulary",
+  titleKey: "subjects.ifl.vocabulary",
+  typeKey: "examType.mcq",
+  icon: BookText,
+  questionCount: 30,
+  durationMinutes: 30,
+  marks: 30,
+};
+
+const readings: ExamSubject = {
+  id: "readings",
+  titleKey: "subjects.ifl.readings",
+  typeKey: "examType.mcq",
+  icon: BookOpen,
+  questionCount: 30,
+  durationMinutes: 40,
+  marks: 30,
+};
 
 export const subjectsByInstitution: Record<string, { titleKey: TranslationKey; groups: ExamGroup[] }> = {
   itc: {

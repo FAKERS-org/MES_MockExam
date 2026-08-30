@@ -1,10 +1,10 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { LogOut } from "lucide-react";
+import type { ReactNode } from "react";
 import { useLanguage } from "@/lib/i18n";
 
 export interface NavItem {
-  icon: React.ReactNode;
+  icon: ReactNode;
   label: string;
   active?: boolean;
   to?: string;
@@ -16,7 +16,7 @@ interface SidebarProps {
   navItems: NavItem[];
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ open, onClose, navItems }) => {
+function Sidebar({ open, onClose, navItems }: SidebarProps) {
   const { t } = useLanguage();
   const navigate = useNavigate();
 
@@ -28,11 +28,10 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, navItems }) => {
 
   return (
     <aside
-      className={`fixed inset-y-0 left-0 z-50 flex h-screen w-64 flex-col bg-white border-r border-gray-100 dark:bg-card dark:border-border transition-all lg:static lg:translate-x-0 lg:overflow-hidden ${
+      className={`fixed inset-y-0 left-0 z-50 flex h-screen w-64 flex-col border-r border-sidebar-border bg-sidebar transition-all lg:static lg:translate-x-0 lg:overflow-hidden ${
         open ? "translate-x-0 w-full sm:w-64" : "-translate-x-full w-64 lg:w-0"
       }`}
     >
-      {/* Logo */}
       <div className="flex items-center justify-center px-5 py-6">
         <img
           src="/images/MES-logo-horizontal.png"
@@ -41,39 +40,36 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, navItems }) => {
         />
       </div>
 
-      {/* Navigation */}
-      <nav className="flex-1 px-3 space-y-1 mt-2">
-        {navItems.map((item) => {
-          const isActive = item.active;
-          return (
-            <button
-              key={item.label}
-              onClick={() => handleNav(item)}
-              className={`flex w-full items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                isActive
-                  ? "bg-[#e3f2fd] text-[#1e88e5] dark:bg-blue-500/15 dark:text-blue-400"
-                  : "text-gray-400 hover:text-gray-600 hover:bg-gray-50 dark:text-muted-foreground dark:hover:text-foreground dark:hover:bg-accent"
-              }`}
-            >
-              {item.icon}
-              <span>{item.label}</span>
-            </button>
-          );
-        })}
+      <nav className="mt-2 flex-1 space-y-1 px-3">
+        {navItems.map((item) => (
+          <button
+            key={item.label}
+            type="button"
+            onClick={() => handleNav(item)}
+            className={`flex w-full items-center gap-3 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors ${
+              item.active
+                ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                : "text-muted-foreground hover:bg-accent hover:text-foreground"
+            }`}
+          >
+            {item.icon}
+            <span>{item.label}</span>
+          </button>
+        ))}
       </nav>
 
-      {/* Logout */}
-      <div className="px-3 pb-6 mt-auto">
+      <div className="mt-auto px-3 pb-6">
         <button
+          type="button"
           onClick={onClose}
-          className="flex w-full items-center gap-3 px-4 py-2.5 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-50 text-sm font-medium transition-colors dark:text-muted-foreground dark:hover:text-foreground dark:hover:bg-accent"
+          className="flex w-full items-center gap-3 rounded-lg px-4 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
         >
-          <LogOut className="h-5 w-5" />
+          <LogOut className="size-5" />
           <span>{t("sidebar.logout")}</span>
         </button>
       </div>
     </aside>
   );
-};
+}
 
 export default Sidebar;

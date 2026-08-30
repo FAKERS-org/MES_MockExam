@@ -1,74 +1,48 @@
 import { Link } from "react-router-dom";
 import { BookOpen } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useLanguage, TranslationKey } from "@/lib/i18n";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { useLanguage } from "@/lib/i18n";
+import { institutions } from "@/data/institutions";
+import { subjectsByInstitution } from "@/data/subjects";
 
-// ---------------------------------------------------------------------------
-// Mock data
-// ---------------------------------------------------------------------------
-
-interface Institution {
-  id: string;
-  nameKey: TranslationKey;
-  logo: string;
-}
-
-const institutions: Institution[] = [
-  { id: "itc", nameKey: "overview.institutions.itc", logo: "/images/ITC-logo.png" },
-  { id: "usha", nameKey: "overview.institutions.usha", logo: "/images/UHS-logo.png" },
-  { id: "rupp", nameKey: "overview.institutions.rupp", logo: "/images/RUPP-logo.png" },
-  { id: "ifl", nameKey: "overview.institutions.ifl", logo: "/images/IFL-logo.png" },
-];
-
-// ---------------------------------------------------------------------------
-// Page sections
-// ---------------------------------------------------------------------------
+const implemented = institutions.filter((institution) => institution.id in subjectsByInstitution);
 
 function ProfileCard() {
   const { t } = useLanguage();
   return (
-    <div className="flex items-center gap-4 rounded-xl border bg-white p-5 shadow-sm dark:bg-card dark:border-border">
-      <Avatar className="h-14 w-14">
-        <AvatarImage src="https://i.pravatar.cc/112?img=13" alt="" />
-        <AvatarFallback>YA</AvatarFallback>
+    <div className="flex items-center gap-4 rounded-xl border bg-card p-5 shadow-sm">
+      <Avatar className="size-14">
+        <AvatarFallback>YO</AvatarFallback>
       </Avatar>
       <div>
-        <p className="text-base font-bold text-slate-900 dark:text-foreground">
-          {t("overview.welcome", { name: "យាង អូយអឹង" })}
-        </p>
-        <p className="text-sm text-slate-500 dark:text-muted-foreground">{t("overview.role")}</p>
+        <p className="text-base font-bold text-foreground">{t("overview.welcome", { name: t("overview.userName") })}</p>
+        <p className="text-sm text-muted-foreground">{t("overview.role")}</p>
       </div>
     </div>
   );
 }
 
-function InstitutionCard({ institution }: { institution: Institution }) {
+function InstitutionCard({ institution }: { institution: (typeof implemented)[number] }) {
   const { t } = useLanguage();
   const name = t(institution.nameKey);
+  const count = subjectsByInstitution[institution.id]!.groups.reduce(
+    (sum, group) => sum + group.subjects.length,
+    0,
+  );
   return (
     <Link
       to={`/dashboard/${institution.id}`}
-      className="flex flex-col items-center rounded-xl border bg-white p-6 text-center shadow-sm transition-shadow hover:shadow-md dark:bg-card dark:border-border"
+      className="flex flex-col items-center rounded-xl border bg-card p-6 text-center shadow-sm transition-shadow hover:shadow-md"
     >
-      <img
-        src={institution.logo}
-        alt={name}
-        className="mb-4 h-24 w-24 rounded-full object-contain"
-      />
-      <p className="mb-2 min-h-[2.75rem] text-sm font-semibold leading-snug text-slate-900 dark:text-foreground">
-        {name}
-      </p>
-      <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-muted-foreground">
-        <BookOpen className="h-3.5 w-3.5" />
-        <span>{t("overview.subjectsLabel")}</span>
+      <img src={institution.logo} alt={name} className="mb-4 size-24 rounded-full object-contain" />
+      <p className="mb-2 min-h-[2.75rem] text-sm font-semibold leading-snug text-foreground">{name}</p>
+      <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+        <BookOpen className="size-3.5" />
+        <span>{t("overview.subjects", { count })}</span>
       </div>
     </Link>
   );
 }
-
-// ---------------------------------------------------------------------------
-// Page
-// ---------------------------------------------------------------------------
 
 export default function DashboardOverviewPage() {
   return (
@@ -76,7 +50,7 @@ export default function DashboardOverviewPage() {
       <ProfileCard />
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {institutions.map((institution) => (
+        {implemented.map((institution) => (
           <InstitutionCard key={institution.id} institution={institution} />
         ))}
       </div>

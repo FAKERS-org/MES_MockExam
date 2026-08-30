@@ -1,31 +1,42 @@
 import { serve } from "bun";
 import index from "./index.html";
 
+const IMAGES_DIR = "public/images";
+const ICONS_DIR = "public/icons";
+
+async function serveStaticFile(req: Request, dir: string, prefix: string): Promise<Response> {
+  const pathname = new URL(req.url).pathname;
+  const relative = decodeURIComponent(pathname.slice(prefix.length));
+
+  if (!relative || relative.includes("..")) {
+    return new Response("Not found", { status: 404 });
+  }
+
+  const file = Bun.file(`./${dir}/${relative}`);
+  if (await file.exists()) {
+    return new Response(file);
+  }
+
+  return new Response("Not found", { status: 404 });
+}
+
+const production =
+  process.env.NODE_ENV === "production" || process.argv.includes("--production");
+
 const server = serve({
   routes: {
-    // Serve static images from the public/images directory.
-    "/images/*": (req) => {
-      const path = new URL(req.url).pathname.slice("/images/".length);
-      return new Response(Bun.file(`./public/images/${path}`));
-    },
-
-    // Serve icons from the public/icons directory.
-    "/icons/*": (req) => {
-      const path = new URL(req.url).pathname.slice("/icons/".length);
-      return new Response(Bun.file(`./public/icons/${path}`));
-    },
-
-    // Serve index.html for all unmatched routes.
+    "/images/*": (req) => serveStaticFile(req, IMAGES_DIR, "/images/"),
+    "/icons/*": (req) => serveStaticFile(req, ICONS_DIR, "/icons/"),
     "/*": index,
 
     "/api/hello": {
-      async GET(req) {
+      async GET(_req) {
         return Response.json({
           message: "Hello, world!",
           method: "GET",
         });
       },
-      async PUT(req) {
+      async PUT(_req) {
         return Response.json({
           message: "Hello, world!",
           method: "PUT",
@@ -33,7 +44,7 @@ const server = serve({
       },
     },
 
-    "/api/hello/:name": async req => {
+    "/api/hello/:name": async (req) => {
       const name = req.params.name;
       return Response.json({
         message: `Hello, ${name}!`,
@@ -41,13 +52,12 @@ const server = serve({
     },
   },
 
-  development: process.env.NODE_ENV !== "production" && {
-    // Enable browser hot reloading in development
-    hmr: true,
-
-    // Echo console logs from the browser to the server
-    console: true,
-  },
+  development: production
+    ? undefined
+    : {
+        hmr: true,
+        console: true,
+      },
 });
 
 console.log(`🚀 Server running at ${server.url}`);

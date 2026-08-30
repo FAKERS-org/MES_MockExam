@@ -1,69 +1,47 @@
-import React from "react";
+import { Fragment } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
-import { useLanguage, TranslationKey } from "@/lib/i18n";
-import { subjectsByInstitution } from "@/pages/dashboard/subjects-data";
-
-const institutionLabels: Record<string, TranslationKey> = {
-  itc: "overview.institutions.itc",
-  usha: "overview.institutions.usha",
-  rupp: "overview.institutions.rupp",
-  ifl: "overview.institutions.ifl",
-};
+import { useLanguage, type TranslationKey } from "@/lib/i18n";
+import { institutionLabels } from "@/data/institutions";
+import { findSubject } from "@/data/subjects";
 
 interface Crumb {
   label: string;
   to?: string;
 }
 
-export const Breadcrumbs: React.FC = () => {
+function Breadcrumbs() {
   const { pathname } = useLocation();
   const { t } = useLanguage();
 
   const segments = pathname.split("/").filter(Boolean);
 
   const crumbs: Crumb[] = [];
-
   if (segments.length === 0) {
     crumbs.push({ label: t("nav.dashboard") });
   } else if (segments[0] === "history") {
     crumbs.push({ label: t("nav.history") });
   } else if (segments[0] === "dashboard") {
     crumbs.push({ label: t("nav.dashboard"), to: "/" });
-    const institution = segments[1];
-    const subjectId = segments[2];
-    const action = segments[3];
+    const [institution, subjectId, action] = segments.slice(1);
 
     if (institution) {
-      const instKey = institutionLabels[institution];
+      const instKey = institutionLabels[institution] as TranslationKey | undefined;
       crumbs.push({
         label: instKey ? t(instKey) : decodeURIComponent(institution),
         to: `/dashboard/${institution}`,
       });
 
-      let subjectTitle: string | null = null;
-      if (subjectId) {
-        const data = subjectsByInstitution[institution];
-        if (data) {
-          for (const group of data.groups) {
-            const subject = group.subjects.find((s) => s.id === subjectId);
-            if (subject) {
-              subjectTitle = t(subject.titleKey);
-              break;
-            }
-          }
-        }
-      }
-
-      if (subjectTitle) {
+      const found = subjectId ? findSubject(institution, subjectId) : null;
+      if (found) {
         if (action === "take") {
           crumbs.push({
-            label: subjectTitle,
+            label: t(found.subject.titleKey),
             to: `/dashboard/${institution}/${subjectId}`,
           });
           crumbs.push({ label: t("breadcrumbs.taking") });
         } else {
-          crumbs.push({ label: subjectTitle });
+          crumbs.push({ label: t(found.subject.titleKey) });
         }
       }
     } else {
@@ -77,30 +55,30 @@ export const Breadcrumbs: React.FC = () => {
         {crumbs.map((crumb, i) => {
           const isLast = i === crumbs.length - 1;
           return (
-            <React.Fragment key={i}>
+            <Fragment key={i}>
               {i > 0 && (
-                <li className="flex text-gray-300 dark:text-muted-foreground/50">
-                  <ChevronRight className="h-4 w-4" />
+                <li className="flex text-muted-foreground/50">
+                  <ChevronRight className="size-4" />
                 </li>
               )}
               <li aria-current={isLast ? "page" : undefined}>
                 {isLast || !crumb.to ? (
-                  <span className="font-medium text-gray-700 dark:text-foreground">{crumb.label}</span>
+                  <span className="font-medium text-foreground">{crumb.label}</span>
                 ) : (
                   <Link
                     to={crumb.to}
-                    className="text-gray-400 transition-colors hover:text-gray-600 dark:text-muted-foreground dark:hover:text-foreground"
+                    className="text-muted-foreground transition-colors hover:text-foreground"
                   >
                     {crumb.label}
                   </Link>
                 )}
               </li>
-            </React.Fragment>
+            </Fragment>
           );
         })}
       </ol>
     </nav>
   );
-};
+}
 
 export default Breadcrumbs;
