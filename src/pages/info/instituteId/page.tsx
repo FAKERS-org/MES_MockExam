@@ -35,8 +35,10 @@ export default function UniversityPage() {
       </div>
 
       <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-[1.5fr_1fr]">
-        <div className="w-full">
-          <DepartementInfoCard institution={data} />
+        <div className="w-full flex flex-col gap-6">
+          {data.departments.map((dept) => (
+            <DepartementInfoCard key={dept.id} department={dept} />
+          ))}
         </div>
         <UniInfoSecondCard institution={data} />
       </div>

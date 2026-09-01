@@ -5,7 +5,7 @@ import SubjectsPage from "./pages/dashboard/subjects-page";
 import ExamOptionsPage from "./pages/dashboard/exam-options-page";
 import HistoryPage from "./pages/history/page";
 import InfoPage from "./pages/info/page";
-import UniversityPage from "./pages/info/university-page";
+import UniversityPage from "./pages/info/instituteId/page";
 import ErrorPage from "./pages/error/page";
 import "./index.css";
 
