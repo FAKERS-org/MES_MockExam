@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useLanguage } from "@/lib/i18n";
 import type { Institution } from "@/data/institutions";
 
@@ -6,7 +7,7 @@ const UniInfoCard = ({ institution }: { institution: Institution }) => {
   const name = t(institution.nameKey);
 
   return (
-    <div className="h-full w-full flex flex-col rounded-2xl overflow-hidden shadow-lg bg-card border border-border">
+    <Link to={`/info/${institution.id}`} className="h-full w-full flex flex-col rounded-2xl overflow-hidden shadow-lg bg-card border border-border transition-shadow hover:shadow-xl">
       {/* Dark Blue Header */}
       <div className="bg-[#0f4c81] h-24 relative">
         {/* Logo positioned to overlap header and body */}
@@ -75,7 +76,7 @@ const UniInfoCard = ({ institution }: { institution: Institution }) => {
           </div>
         )}
       </div>
-    </div>
+    </Link>
   );
 };
 
