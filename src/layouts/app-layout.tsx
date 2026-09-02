@@ -28,12 +28,12 @@ function AppLayout() {
     <div className="flex h-screen overflow-hidden bg-background">
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} navItems={navItems} />
 
-      {sidebarOpen && (
-        <div
-          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
+      <div
+        className={`fixed inset-0 z-40 bg-black/50 transition-opacity duration-300 lg:hidden ${
+          sidebarOpen ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+        onClick={() => setSidebarOpen(false)}
+      />
 
       <div className="flex min-w-0 flex-1 flex-col bg-muted/40 dark:bg-background">
         <main className="flex h-screen flex-1 flex-col gap-4 overflow-y-auto p-4 md:p-6">

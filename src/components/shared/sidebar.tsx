@@ -28,45 +28,49 @@ function Sidebar({ open, onClose, navItems }: SidebarProps) {
 
   return (
     <aside
-      className={`fixed inset-y-0 left-0 z-50 flex h-screen w-64 flex-col border-r border-sidebar-border bg-sidebar transition-all lg:static lg:translate-x-0 lg:overflow-hidden ${
-        open ? "translate-x-0 w-full sm:w-64" : "-translate-x-full w-64 lg:w-0"
+      className={`fixed inset-y-0 left-0 z-50 flex h-screen w-full flex-col overflow-hidden border-r border-sidebar-border bg-sidebar transition-[transform,width] duration-300 ease-in-out sm:w-64 lg:static ${
+        open
+          ? "translate-x-0 lg:w-64"
+          : "-translate-x-full lg:translate-x-0 lg:w-0"
       }`}
     >
-      <div className="flex items-center justify-center px-5 py-6">
-        <img
-          src="/images/MES-logo-horizontal.png"
-          alt="MES Logo"
-          className="h-7 w-auto object-contain"
-        />
-      </div>
+      <div className="flex h-full w-64 flex-col">
+        <div className="flex items-center justify-center px-5 py-6">
+          <img
+            src="/images/MES-logo-horizontal.png"
+            alt="MES Logo"
+            className="h-7 w-auto object-contain"
+          />
+        </div>
 
-      <nav className="mt-2 flex-1 space-y-1 px-3">
-        {navItems.map((item) => (
+        <nav className="mt-2 flex-1 space-y-1 px-3">
+          {navItems.map((item) => (
+            <button
+              key={item.label}
+              type="button"
+              onClick={() => handleNav(item)}
+              className={`flex w-full items-center gap-3 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors ${
+                item.active
+                  ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                  : "text-muted-foreground hover:bg-accent hover:text-foreground"
+              }`}
+            >
+              {item.icon}
+              <span>{item.label}</span>
+            </button>
+          ))}
+        </nav>
+
+        <div className="mt-auto px-3 pb-6">
           <button
-            key={item.label}
             type="button"
-            onClick={() => handleNav(item)}
-            className={`flex w-full items-center gap-3 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors ${
-              item.active
-                ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                : "text-muted-foreground hover:bg-accent hover:text-foreground"
-            }`}
+            onClick={onClose}
+            className="flex w-full items-center gap-3 rounded-lg px-4 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
           >
-            {item.icon}
-            <span>{item.label}</span>
+            <LogOut className="size-5" />
+            <span>{t("sidebar.logout")}</span>
           </button>
-        ))}
-      </nav>
-
-      <div className="mt-auto px-3 pb-6">
-        <button
-          type="button"
-          onClick={onClose}
-          className="flex w-full items-center gap-3 rounded-lg px-4 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-        >
-          <LogOut className="size-5" />
-          <span>{t("sidebar.logout")}</span>
-        </button>
+        </div>
       </div>
     </aside>
   );
