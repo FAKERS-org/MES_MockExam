@@ -141,15 +141,49 @@ const InstituteCard: React.FC<{ data: CardData }> = ({ data }) => {
   );
 };
 
+const FilterContext = React.createContext({
+  filter: '',
+  setFilter: (value: string) => {}
+});
+
+const StatsBar: React.FC<{ total: number }> = ({ total }) => (
+  <div className="flex items-center justify-between mb-4 p-4 bg-white rounded-lg shadow-sm">
+    <span className="text-gray-700">Total Departments: {total}</span>
+    <button
+      className="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700 transition-colors"
+    >
+      Add Department
+    </button>
+  </div>
+);
+
 const InstituteInfoGrid: React.FC = () => {
+  const [filter, setFilter] = React.useState('');
+  const filteredCards = cards.filter(card => 
+    card.englishTitle.toLowerCase().includes(filter.toLowerCase()) ||
+    card.khmerTitle.toLowerCase().includes(filter.toLowerCase())
+  );
+
   return (
-    <div className="min-h-screen bg-slate-100 p-6 md:p-8">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {cards.map((card) => (
-          <InstituteCard key={card.id} data={card} />
-        ))}
+    <FilterContext.Provider value={{ filter, setFilter }}>
+      <div className="min-h-screen bg-slate-100 p-6 md:p-8">
+        <div className="max-w-6xl mx-auto">
+          {/* Filter Input */}
+          <input
+            type="text"
+            placeholder="Filter departments..."
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+            className="w-full p-2 mb-6 rounded-md shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500"
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredCards.map((card) => (
+              <InstituteCard key={card.id} data={card} />
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
+    </FilterContext.Provider>
   );
 };
 
