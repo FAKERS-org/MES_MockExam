@@ -36,4 +36,4 @@ bun start       # serves the app without hot reloading
 - `src/lib/` — i18n, theme, and utility helpers
 - `src/locales/` — Khmer/English strings (keep key parity between the two)
 - `public/` — static images and icons
-- `styles/` — Tailwind entry points and design tokens
+- `src/styles/` — Tailwind entry points and design tokens
