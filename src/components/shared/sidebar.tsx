@@ -23,7 +23,6 @@ function Sidebar({ open, onClose, navItems }: SidebarProps) {
   const handleNav = (item: NavItem) => {
     if (item.to) {
       navigate(item.to);
-      onClose();
     }
   };
 
@@ -52,7 +51,7 @@ function Sidebar({ open, onClose, navItems }: SidebarProps) {
               onClick={() => handleNav(item)}
               className={`flex w-full items-center gap-3 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors ${
                 item.active
-                  ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                  ? "bg-sky-100 text-sky-900 dark:bg-sky-950/80 dark:text-sky-100 font-semibold"
                   : "text-muted-foreground hover:bg-accent hover:text-foreground"
               }`}
             >

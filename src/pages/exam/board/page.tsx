@@ -335,20 +335,26 @@ function ExamBoardPage() {
                         "flex cursor-pointer items-center gap-3 rounded-lg border-2 transition-all",
                         optionPadded,
                         selected
-                          ? "border-primary bg-primary/5"
-                          : "border-border hover:border-primary/60 hover:bg-primary/5/50",
+                          ? "border-sky-500 bg-sky-100/70 dark:bg-sky-950/60 dark:border-sky-400"
+                          : "border-border hover:border-sky-400 hover:bg-sky-50/50 dark:hover:bg-sky-950/20",
                       )}
                     >
                       <RadioGroupItem
                         value={opt.id}
                         id={`q${q.id}-${opt.id}`}
-                        className={selected ? "border-primary text-primary" : ""}
+                        className={selected ? "border-sky-600 text-sky-600 dark:border-sky-400 dark:text-sky-400" : ""}
                       />
                       <Label
                         htmlFor={`q${q.id}-opt-${opt.id}`}
                         className={cn("flex-1 cursor-pointer font-medium", optionLabelSize)}
                       >
-                        <span className={cn("mr-2 inline-flex items-center justify-center rounded-full bg-primary/20 text-primary-foreground font-bold", optionIdSize)}>
+                        <span className={cn(
+                          "mr-2 inline-flex items-center justify-center rounded-full font-bold",
+                          selected
+                            ? "bg-sky-500 text-white"
+                            : "bg-muted text-muted-foreground",
+                          optionIdSize
+                        )}>
                           {opt.id}
                         </span>
                         {opt.text}
