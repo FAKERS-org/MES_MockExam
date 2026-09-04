@@ -143,7 +143,7 @@ const InstituteCard: React.FC<{ data: CardData }> = ({ data }) => {
 
 const FilterContext = React.createContext({
   filter: '',
-  setFilter: (value: string) => {}
+  setFilter: (_value: string) => {}
 });
 
 const StatsBar: React.FC<{ total: number }> = ({ total }) => (
@@ -176,6 +176,7 @@ const InstituteInfoGrid: React.FC = () => {
             onChange={(e) => setFilter(e.target.value)}
             className="w-full p-2 mb-6 rounded-md shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500"
           />
+          <StatsBar total={filteredCards.length} />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredCards.map((card) => (
               <InstituteCard key={card.id} data={card} />

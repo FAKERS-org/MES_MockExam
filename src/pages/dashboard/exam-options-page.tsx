@@ -63,7 +63,7 @@ export default function ExamOptionsPage() {
               onClick={() => setSelectedYear(year)}
               className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
                 selectedYear === year
-                  ? "bg-blue-600 text-white"
+                  ? "bg-primary text-white"
                   : "bg-secondary text-secondary-foreground hover:bg-muted-foreground/20"
               }`}
             >

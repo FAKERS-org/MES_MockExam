@@ -5,15 +5,27 @@ import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   ChevronLeft,
   ChevronRight,
   CheckCircle2,
   Flag,
   X,
   AlertCircle,
+  LayoutGrid,
+  Minimize,
+  Maximize,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { EXAM_CONFIG } from "@/config/exam.config";
+
+type LayoutMode = "compact" | "normal" | "fullscreen";
 
 // ─── Question data ───────────────────────────────────────────────────────────
 
@@ -171,10 +183,23 @@ function ExamBoardPage() {
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [flagged, setFlagged] = useState<Record<number, boolean>>({});
   const [showModal, setShowModal] = useState(false);
+  const [layoutMode, setLayoutMode] = useState<LayoutMode>("normal");
   const timer = useTimer();
   const q = QUESTIONS[index];
   const total = QUESTIONS.length;
   const answered = Object.keys(answers).length;
+
+  const isCompact = layoutMode === "compact";
+  const isFull = layoutMode === "fullscreen";
+  const dotSize = isCompact ? "size-6" : isFull ? "size-8" : "size-7";
+  const dotGap = isCompact ? "gap-1" : isFull ? "gap-2" : "gap-2";
+  const contentMaxWidth = isFull ? "max-w-none" : isCompact ? "max-w-xl" : "max-w-7xl";
+  const contentPadding = isCompact ? "p-3" : isFull ? "p-6" : "p-4";
+  const cardPadding = isCompact ? "p-3" : isFull ? "p-5" : "p-3";
+  const cardGap = isCompact ? "gap-2" : isFull ? "gap-4" : "gap-3";
+  const optionPadded = isCompact ? "p-2" : isFull ? "p-4" : "p-3";
+  const optionLabelSize = isCompact ? "text-xs" : isFull ? "text-base" : "text-sm";
+  const optionIdSize = isCompact ? "size-5 text-[10px]" : isFull ? "size-7 text-sm" : "size-6 text-xs";
 
   // Auto-submit when time runs out
   useEffect(() => {
@@ -195,62 +220,106 @@ function ExamBoardPage() {
     navigate(`/dashboard/${subjectId}/take/result`);
   };
 
+  if (!q) return null;
+
   return (
     <div className="flex h-full flex-col overflow-hidden">
-      {/* ── Top bar: question dots ── */}
-      <div className="shrink-0 border-b border-border bg-muted/20 px-4 py-2.5">
-        <div className="mx-auto flex max-w-2xl items-center gap-1.5 overflow-x-auto scrollbar-hide">
-          {QUESTIONS.map((qq, i) => {
-            const done = answers[qq.id] != null;
-            const isFlag = flagged[qq.id];
-            const active = i === index;
-            return (
-              <button
-                key={qq.id}
-                type="button"
-                onClick={() => setIndex(i)}
-                className={cn(
-                  "relative flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-bold transition-all",
-                  active
-                    ? "bg-primary text-primary-foreground ring-2 ring-primary ring-offset-1 ring-offset-background"
-                    : done
-                      ? "bg-primary/20 text-primary"
-                      : "bg-muted text-muted-foreground hover:bg-muted/80",
-                )}
-              >
-                {done ? <CheckCircle2 className="size-4" /> : qq.id}
-                {isFlag && (
-                  <span className="absolute -top-0.5 -right-0.5 flex size-3 items-center justify-center rounded-full bg-warning">
-                    <Flag className="size-2 text-warning-foreground" />
-                  </span>
-                )}
-              </button>
-            );
-          })}
+      {/* ── Top bar: question dots + layout selector ── */}
+      <div className="shrink-0 border-b border-border bg-background px-4 py-3">
+        <div className={cn("mx-auto flex items-center gap-3", isFull ? "max-w-none px-0" : isCompact ? "max-w-xl" : "max-w-7xl")}>
+          <span className="shrink-0 text-xs font-medium text-muted-foreground">
+            សំណួរ
+          </span>
+          <div className={cn("flex flex-1 items-center gap-2 overflow-x-auto", dotGap)}>
+            {QUESTIONS.map((qq, i) => {
+              const done = answers[qq.id] != null;
+              const isFlag = flagged[qq.id];
+              const active = i === index;
+              return (
+                <button
+                  key={qq.id}
+                  type="button"
+                  onClick={() => setIndex(i)}
+                  className={cn(
+                    "relative flex shrink-0 items-center justify-center rounded-md text-xs font-semibold transition-all",
+                    dotSize,
+                    active
+                      ? "bg-primary text-white shadow-sm"
+                      : done
+                        ? "bg-primary/15 text-primary hover:bg-primary/25"
+                        : "bg-muted text-muted-foreground hover:bg-muted/80",
+                  )}
+                >
+                  {done ? <CheckCircle2 className="size-3.5" /> : qq.id}
+                  {isFlag && (
+                    <span className="absolute -top-0.5 -right-0.5 flex size-3 items-center justify-center rounded-full bg-warning">
+                      <Flag className="size-2 text-white" />
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+          <span className="shrink-0 text-xs text-muted-foreground">
+            {answered}/{total}
+          </span>
+          <Select value={layoutMode} onValueChange={(v) => setLayoutMode(v as LayoutMode)}>
+            <SelectTrigger
+              size="sm"
+              hideChevron
+              className={cn(
+                "h-8 gap-1.5 border border-dashed text-muted-foreground [&>svg]:size-3.5",
+                isCompact && "border-primary/40 text-primary",
+                isFull && "border-primary text-primary",
+              )}
+            >
+              <SelectValue placeholder="Layout" />
+            </SelectTrigger>
+            <SelectContent align="end">
+              <SelectItem value="compact">
+                <div className="flex items-center gap-2">
+                  <Minimize className="size-3.5 text-muted-foreground" />
+                  <span>Compact</span>
+                </div>
+              </SelectItem>
+              <SelectItem value="normal">
+                <div className="flex items-center gap-2">
+                  <LayoutGrid className="size-3.5 text-muted-foreground" />
+                  <span>Normal</span>
+                </div>
+              </SelectItem>
+              <SelectItem value="fullscreen">
+                <div className="flex items-center gap-2">
+                  <Maximize className="size-3.5 text-muted-foreground" />
+                  <span>Fullscreen</span>
+                </div>
+              </SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
 
       {/* ── Main scrollable area ── */}
-      <div className="flex-1 overflow-y-auto p-4">
-        <div className="mx-auto max-w-2xl">
+      <div className={cn("flex-1 overflow-y-auto", contentPadding)}>
+        <div className={cn("mx-auto", contentMaxWidth)}>
           {/* Question card */}
           <Card>
-            <CardHeader className="pb-3">
+            <CardHeader className={cn("pb-3", cardPadding)}>
               <div className="flex items-center justify-between">
                 <span className="text-xs font-medium text-muted-foreground">
                   សំណួរ {q.id} / {total}
                 </span>
                 {flagged[q.id] && (
-                  <span className="flex items-center gap-1 text-xs text-warning">
+                  <span className="flex items-center gap-1 text-xs text-primary">
                     <Flag className="size-3" /> បានសម្គាល់
                   </span>
                 )}
               </div>
-              <CardTitle className="text-base font-semibold leading-relaxed">
+              <CardTitle className={cn("font-semibold leading-relaxed", isCompact ? "text-sm" : isFull ? "text-xl" : "text-base")}>
                 {q.text}
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className={cardPadding}>
               <RadioGroup
                 value={answers[q.id]}
                 onValueChange={(v) => select(q.id, v)}
@@ -263,10 +332,11 @@ function ExamBoardPage() {
                       key={opt.id}
                       onClick={() => select(q.id, opt.id)}
                       className={cn(
-                        "flex cursor-pointer items-center gap-3 rounded-lg border-2 p-3 transition-all",
+                        "flex cursor-pointer items-center gap-3 rounded-lg border-2 transition-all",
+                        optionPadded,
                         selected
                           ? "border-primary bg-primary/5"
-                          : "border-border hover:border-muted-foreground/40 hover:bg-muted/30",
+                          : "border-border hover:border-primary/60 hover:bg-primary/5/50",
                       )}
                     >
                       <RadioGroupItem
@@ -276,9 +346,9 @@ function ExamBoardPage() {
                       />
                       <Label
                         htmlFor={`q${q.id}-opt-${opt.id}`}
-                        className="flex-1 cursor-pointer text-sm font-medium"
+                        className={cn("flex-1 cursor-pointer font-medium", optionLabelSize)}
                       >
-                        <span className="mr-2 inline-flex size-6 items-center justify-center rounded-full bg-muted text-xs font-bold">
+                        <span className={cn("mr-2 inline-flex items-center justify-center rounded-full bg-primary/20 text-primary-foreground font-bold", optionIdSize)}>
                           {opt.id}
                         </span>
                         {opt.text}
@@ -291,7 +361,7 @@ function ExamBoardPage() {
           </Card>
 
           {/* Navigation */}
-          <div className="mt-4 flex items-center justify-between">
+          <div className={cn("mt-4 flex items-center justify-between", cardGap)}>
             <div className="flex items-center gap-2">
               <Button
                 variant="outline"
@@ -302,7 +372,7 @@ function ExamBoardPage() {
               >
                 <ChevronLeft className="size-4" /> មុន
               </Button>
-              <span className="text-sm text-muted-foreground">
+              <span className={cn("text-muted-foreground", isCompact ? "text-xs" : isFull ? "text-base" : "text-sm")}>
                 {index + 1} / {total}
               </span>
               <Button
@@ -321,7 +391,8 @@ function ExamBoardPage() {
               onClick={() => toggleFlag(q.id)}
               className={cn(
                 "gap-1",
-                flagged[q.id] && "text-warning",
+                flagged[q.id] && "text-primary",
+                isCompact ? "text-xs" : isFull ? "text-base" : "",
               )}
             >
               <Flag className="size-4" />
@@ -332,8 +403,8 @@ function ExamBoardPage() {
       </div>
 
       {/* ── Bottom bar ── */}
-      <div className="shrink-0 border-t border-border bg-background px-4 py-3">
-        <div className="mx-auto flex max-w-2xl items-center justify-between gap-4">
+      <div className={cn("shrink-0 border-t border-border bg-background", isFull ? "px-6 py-4" : "px-4 py-3")}>
+        <div className={cn("mx-auto flex items-center justify-between gap-4", isFull ? "max-w-none" : isCompact ? "max-w-xl" : "max-w-7xl")}>
           {/* Timer */}
           <div className="flex items-center gap-3">
             <div className="h-1.5 w-24 overflow-hidden rounded-full bg-muted">
@@ -368,7 +439,7 @@ function ExamBoardPage() {
             <span className="text-xs text-muted-foreground">
               ចម្លើយ {answered}/{total}
             </span>
-            <Button size="sm" onClick={handleFinish} className="gap-1">
+            <Button size="sm" onClick={handleFinish} className="gap-1 bg-primary hover:bg-primary/90">
               <CheckCircle2 className="size-4" />
               បញ្ចប់
             </Button>

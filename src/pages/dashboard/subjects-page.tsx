@@ -33,7 +33,7 @@ export default function SubjectsPage() {
     return (
       <div className="flex flex-col items-center gap-4 py-16 text-center">
         <p className="text-sm text-muted-foreground">{t("exam.subjectNotFound")}</p>
-        <Link to="/" className="text-sm font-medium text-blue-600 hover:underline">
+        <Link to="/" className="text-sm font-medium text-primary hover:underline">
           {t("nav.dashboard")}
         </Link>
       </div>
@@ -72,7 +72,7 @@ export default function SubjectsPage() {
               onClick={() => setLangFilter(null)}
               className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
                 langFilter === null
-                  ? "bg-blue-600 text-white"
+                  ? "bg-primary text-white"
                   : "bg-secondary text-secondary-foreground hover:bg-muted"
               }`}
             >
@@ -88,7 +88,7 @@ export default function SubjectsPage() {
                     onClick={() => setLangFilter(langFilter === groupKey ? null : groupKey)}
                     className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
                       langFilter === groupKey
-                        ? "bg-blue-600 text-white"
+                        ? "bg-primary text-white"
                         : "bg-secondary text-secondary-foreground hover:bg-muted"
                     }`}
                   >

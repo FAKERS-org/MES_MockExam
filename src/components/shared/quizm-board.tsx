@@ -51,14 +51,14 @@ export default function QuizBoard() {
                   onClick={() => setSelectedAnswer(option.id)}
                   className={`flex cursor-pointer items-center space-x-3 rounded-lg border p-4 transition-colors ${
                     isSelected
-                      ? "border-blue-500 bg-blue-50"
+                      ? "border-primary bg-primary/5"
                       : "border-gray-200 hover:bg-gray-50"
                   }`}
                 >
                   <RadioGroupItem
                     value={option.id}
                     id={`option-${option.id}`}
-                    className={isSelected ? "border-blue-500 text-blue-500" : ""}
+                    className={isSelected ? "border-primary text-primary" : ""}
                   />
                   <Label
                     htmlFor={`option-${option.id}`}

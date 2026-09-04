@@ -1,13 +1,10 @@
-import { useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Sun, Moon, Bell, Settings, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/lib/theme";
-import { useLanguage } from "@/lib/i18n";
 
 function ExamTopBar() {
   const { isDark, toggleTheme } = useTheme();
-  const { t } = useLanguage();
   const navigate = useNavigate();
   const { pathname } = useLocation();
 

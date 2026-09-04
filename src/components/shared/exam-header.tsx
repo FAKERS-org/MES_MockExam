@@ -1,10 +1,16 @@
 import { Sun, Maximize, X } from 'lucide-react';
 
-const ExamHeader = ({ onThemeToggle, onFullscreen, onClose }) => {
+interface ExamHeaderProps {
+  onThemeToggle?: () => void;
+  onFullscreen?: () => void;
+  onClose?: () => void;
+}
+
+const ExamHeader = ({ onThemeToggle, onFullscreen, onClose }: ExamHeaderProps) => {
   return (
     <header className="flex items-center justify-between px-6 py-4 bg-white border-b border-gray-100">
       {/* Title */}
-      <h1 className="text-xl font-semibold text-[#1a6b8c] tracking-tight">
+      <h1 className="text-xl font-semibold text-primary tracking-tight">
         ការប្រមូលអត្ថបទ
       </h1>
 

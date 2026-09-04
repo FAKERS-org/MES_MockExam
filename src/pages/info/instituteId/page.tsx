@@ -36,7 +36,7 @@ export default function UniversityPage() {
     return (
       <div className="flex flex-col items-center gap-4 py-16 text-center">
         <p className="text-sm text-muted-foreground">{t("exam.subjectNotFound")}</p>
-        <Link to="/info" className="text-sm font-medium text-blue-600 hover:underline">
+        <Link to="/info" className="text-sm font-medium text-primary hover:underline">
           {t("nav.info")}
         </Link>
       </div>
@@ -127,7 +127,7 @@ export default function UniversityPage() {
                   onClick={() => setCategoryFilter(null)}
                   className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
                     categoryFilter === null
-                      ? "bg-blue-600 text-white"
+                      ? "bg-primary text-white"
                       : "bg-secondary text-secondary-foreground hover:bg-muted"
                   }`}
                 >
@@ -139,7 +139,7 @@ export default function UniversityPage() {
                     onClick={() => setCategoryFilter(categoryFilter === cat ? null : cat)}
                     className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
                       categoryFilter === cat
-                        ? "bg-blue-600 text-white"
+                        ? "bg-primary text-white"
                         : "bg-secondary text-secondary-foreground hover:bg-muted"
                     }`}
                   >
