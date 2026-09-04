@@ -1,27 +1,40 @@
 import { Link } from "react-router-dom";
-import { CircleAlert, Home } from "lucide-react";
+import { Home, AlertCircle } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 
-export default function ErrorPage() {
+interface ErrorPageProps {
+  title?: string;
+  description?: string;
+  showHomeButton?: boolean;
+}
+
+export default function ErrorPage({
+  title = "Page not found",
+  description = "Sorry, the page you are looking for doesn't exist or has been moved.",
+  showHomeButton = true,
+}: ErrorPageProps) {
   const { t } = useLanguage();
 
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-4 rounded-xl border border-dashed bg-background p-12 text-center">
-      <div className="flex size-14 items-center justify-center rounded-full bg-destructive/10">
-        <CircleAlert className="size-7 text-destructive" />
+    <div className="flex min-h-screen items-center justify-center p-4">
+      <div className="text-center">
+        <div className="mb-8 flex justify-center">
+          <AlertCircle className="h-20 w-20 text-muted-foreground/50" />
+        </div>
+
+        <h1 className="mb-4 text-4xl font-bold text-foreground">{title}</h1>
+        <p className="mb-8 max-w-md text-lg text-muted-foreground">{description}</p>
+
+        {showHomeButton && (
+          <Link to="/">
+            <Button>
+              <Home className="mr-2 h-4 w-4" />
+              {t("nav.dashboard")}
+            </Button>
+          </Link>
+        )}
       </div>
-      <div className="space-y-2">
-        <p className="text-sm font-medium text-muted-foreground">{t("error.title")}</p>
-        <h1 className="text-3xl font-bold tracking-tight">{t("error.heading")}</h1>
-      </div>
-      <p className="max-w-md text-sm text-muted-foreground">{t("error.description")}</p>
-      <Button asChild>
-        <Link to="/">
-          <Home className="size-4" />
-          {t("error.goHome")}
-        </Link>
-      </Button>
     </div>
   );
 }

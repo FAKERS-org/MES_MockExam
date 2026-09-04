@@ -1,13 +1,17 @@
 {
   "compilerOptions": {
     // Environment setup & latest features
-    "lib": ["ESNext", "DOM"],
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "target": "ESNext",
-    "module": "Preserve",
+    "module": "ESNext",
     "moduleDetection": "force",
     "jsx": "react-jsx",
     "allowJs": true,
     "types": ["bun", "react"],
+    "useDefineForClassFields": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
 
     // Bundler mode
     "moduleResolution": "bundler",
@@ -21,9 +25,22 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
 
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/pages/*": ["./src/pages/*"],
+      "@/layouts/*": ["./src/layouts/*"],
+      "@/hooks/*": ["./src/hooks/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/services/*": ["./src/services/*"],
+      "@/config/*": ["./src/config/*"],
+      "@/data/*": ["./src/data/*"],
+      "@/styles/*": ["./src/styles/*"]
     },
 
     // Some stricter flags
@@ -31,6 +48,5 @@
     "noUnusedParameters": true,
     "noPropertyAccessFromIndexSignature": false
   },
-
-  "exclude": ["dist", "node_modules"]
+  "exclude": ["dist", "node_modules", "build.ts"]
 }
