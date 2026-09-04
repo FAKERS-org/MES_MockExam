@@ -1,18 +1,25 @@
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import { Sun, Moon, Bell, Settings, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/lib/theme";
+import { useLanguage } from "@/lib/i18n";
+import { findSubject } from "@/data/subjects";
 
 function ExamTopBar() {
   const { isDark, toggleTheme } = useTheme();
+  const { t } = useLanguage();
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const { institution = "", subjectId = "" } = useParams();
+
+  const found = findSubject(institution, subjectId);
+  const subjectTitle = found ? t(found.subject.titleKey) : "Mock Exam";
 
   return (
     <header className="flex w-full items-center justify-between rounded-xl border bg-card px-6 py-3 shadow-sm">
       <div className="flex items-center gap-3">
         <h1 className="text-sm font-semibold text-foreground">
-          Mock Exam — គណិតវិទ្យា
+          Mock Exam — {subjectTitle}
         </h1>
         <span className="text-muted-foreground/50">•</span>
         <span className="text-xs text-muted-foreground">{pathname.split("/").pop()}</span>
@@ -48,7 +55,7 @@ function ExamTopBar() {
           variant="ghost"
           size="icon"
           className="size-8 text-muted-foreground"
-          onClick={() => navigate(-1)}
+          onClick={() => (institution && subjectId ? navigate(`/dashboard/${institution}/${subjectId}`) : navigate("/"))}
           aria-label="Close"
         >
           <X className="size-4" />

@@ -178,7 +178,7 @@ function useTimer() {
 
 function ExamBoardPage() {
   const navigate = useNavigate();
-  const { subjectId } = useParams<{ subjectId: string }>();
+  const { institution, subjectId } = useParams<{ institution: string; subjectId: string }>();
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [flagged, setFlagged] = useState<Record<number, boolean>>({});
@@ -203,8 +203,8 @@ function ExamBoardPage() {
 
   // Auto-submit when time runs out
   useEffect(() => {
-    if (timer.done) navigate(`/exam/${subjectId}/take/result`);
-  }, [timer.done]);
+    if (timer.done) navigate("result");
+  }, [timer.done, navigate]);
 
   const select = (id: number, value: string) =>
     setAnswers((p) => ({ ...p, [id]: value }));
@@ -217,7 +217,7 @@ function ExamBoardPage() {
       setShowModal(true);
       return;
     }
-    navigate(`/exam/${subjectId}/take/result`);
+    navigate("result");
   };
 
   if (!q) return null;
@@ -446,7 +446,7 @@ function ExamBoardPage() {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => navigate(-1)}
+              onClick={() => (institution && subjectId ? navigate(`/dashboard/${institution}/${subjectId}`) : navigate(-1))}
               className="gap-1 text-muted-foreground"
             >
               <X className="size-4" /> ចាកចេញ
@@ -485,7 +485,7 @@ function ExamBoardPage() {
                   className="flex-1"
                   onClick={() => {
                     setShowModal(false);
-                    navigate(`/exam/${subjectId}/take/result`);
+                    navigate("result");
                   }}
                 >
                   បញ្ជាក់

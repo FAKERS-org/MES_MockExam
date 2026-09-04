@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { dataService } from "@/services/data.service";
-import type { Institution, Subject, SubjectQueryResult, SubjectDetailResult, StatisticsResult } from "@/services/data.service";
+import type { SubjectQueryResult, SubjectDetailResult, StatisticsResult } from "@/services/data.service";
 
 /**
  * Hook to fetch institution data with caching

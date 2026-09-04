@@ -155,13 +155,4 @@ class DataService {
 }
 
 export const dataService = new DataService();
-
-// Re-export commonly used types for convenience
-export type {
-  ExamSubject,
-  SubjectFilterOptions,
-  SubjectQueryResult,
-  SubjectDetailResult,
-  StatisticsResult,
-  Institution,
-};
+export type { Institution, ExamSubject };

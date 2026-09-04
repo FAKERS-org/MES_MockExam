@@ -23,6 +23,7 @@ function Sidebar({ open, onClose, navItems }: SidebarProps) {
   const handleNav = (item: NavItem) => {
     if (item.to) {
       navigate(item.to);
+      onClose();
     }
   };
 

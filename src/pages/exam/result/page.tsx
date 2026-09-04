@@ -43,11 +43,11 @@ function ExamResultPage() {
           </div>
 
           <div className="mt-6 flex gap-3">
-            <Button variant="outline" className="flex-1" onClick={() => navigate(-1)}>
+            <Button variant="outline" className="flex-1" onClick={() => navigate("/")}>
               <ArrowLeft className="mr-2 size-4" />
               ត្រឡប់
             </Button>
-            <Button className="flex-1" onClick={() => navigate("/dashboard")}>
+            <Button className="flex-1" onClick={() => navigate("/")}>
               ត្រឡប់ទៅ Dashboard
             </Button>
           </div>

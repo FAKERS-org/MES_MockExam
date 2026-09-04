@@ -29,7 +29,6 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": true,
 
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
       "@/components/*": ["./src/components/*"],

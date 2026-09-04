@@ -1,19 +1,13 @@
-import { rm } from "node:fs/promises";
+import { rm, cp } from "node:fs/promises";
 import path from "node:path";
 import tailwind from "bun-plugin-tailwind";
-import { glob } from "bun";
+import { Glob } from "bun";
 
 const outdir = path.join(process.cwd(), "dist");
 await rm(outdir, { recursive: true, force: true });
 
-// Create dist directory structure
-await Promise.all([
-  Bun.write(`${outdir}/.gitkeep`, ""),
-  Bun.write(`${outdir}/index.html`, ""),
-  Bun.write(`${outdir}/favicon.ico`, ""),
-]);
-
-const entrypoints = await glob("src/**/*.html");
+const glob = new Glob("src/**/*.html");
+const entrypoints = await Array.fromAsync(glob.scan("."));
 
 const result = await Bun.build({
   entrypoints,
@@ -21,7 +15,6 @@ const result = await Bun.build({
   plugins: [tailwind],
   minify: true,
   target: "browser",
-  sourcemap: "linked",
   define: {
     "process.env.NODE_ENV": JSON.stringify("production"),
     "global.__DEV__": "false",
@@ -29,6 +22,13 @@ const result = await Bun.build({
   splitting: true,
   sourcemap: "external",
 });
+
+// Copy public assets if available
+try {
+  await cp(path.join(process.cwd(), "public"), outdir, { recursive: true });
+} catch {
+  // Ignore if public directory does not exist
+}
 
 console.log("\nBuild Summary:");
 console.log("===============");

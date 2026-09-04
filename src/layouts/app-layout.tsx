@@ -15,7 +15,7 @@ function AppLayout() {
 
   const isDashboard = pathname === "/" || pathname.startsWith("/dashboard");
 
-  const isInfo = pathname === "/info";
+  const isInfo = pathname === "/info" || pathname.startsWith("/info/");
 
   const navItems: NavItem[] = [
     { icon: <LayoutGrid className="size-4" />, label: t("nav.dashboard"), active: isDashboard, to: "/" },

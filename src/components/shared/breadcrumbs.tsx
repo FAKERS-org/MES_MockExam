@@ -22,7 +22,16 @@ function Breadcrumbs() {
   } else if (segments[0] === "history") {
     crumbs.push({ label: t("nav.history") });
   } else if (segments[0] === "info") {
-    crumbs.push({ label: t("nav.info") });
+    const institution = segments[1];
+    if (institution) {
+      crumbs.push({ label: t("nav.info"), to: "/info" });
+      const instKey = institutionLabels[institution] as TranslationKey | undefined;
+      crumbs.push({
+        label: instKey ? t(instKey) : decodeURIComponent(institution),
+      });
+    } else {
+      crumbs.push({ label: t("nav.info") });
+    }
   } else if (segments[0] === "dashboard") {
     crumbs.push({ label: t("nav.dashboard"), to: "/" });
     const [institution, subjectId, action] = segments.slice(1);
