@@ -39,6 +39,11 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     window.localStorage.setItem(LANG_KEY, lang);
+    // Apply font based on language
+    document.documentElement.style.setProperty(
+      "--font-current",
+      lang === "en" ? "var(--font-lexend)" : "var(--font-sans)"
+    );
   }, [lang]);
 
   const t: TranslateFn = (key, params) => {
