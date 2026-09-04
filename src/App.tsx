@@ -15,8 +15,8 @@ import "./index.css";
 export function App() {
   return (
     <Routes>
-      {/* ── Exam routes live at root level — no AppLayout wrapper ── */}
-      <Route path="/dashboard/:institution/:subjectId/take" element={<ExamLayout />}>
+      {/* ── Exam routes — separate root-level path, uses ExamLayout ── */}
+      <Route path="/exam/:institution/:subjectId/take" element={<ExamLayout />}>
         <Route index element={<ExamBoardPage />} />
         <Route path="result" element={<ExamResultPage />} />
       </Route>

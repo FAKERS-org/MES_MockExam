@@ -37,7 +37,7 @@ export default function ExamOptionsPage() {
           iconSrc="/icons/tick-icon.png"
           iconAlt={t("exam.options.standard")}
           onClick={() => {
-            navigate(`/dashboard/${institution}/${subjectId}/take`);
+            navigate(`/exam/${institution}/${subjectId}/take`);
           }}
         />
         <ExamOptionCard
@@ -75,7 +75,7 @@ export default function ExamOptionsPage() {
           <p className="text-xs text-muted-foreground">{t("exam.options.selectedYear", { year: selectedYear || "-" })}</p>
           {selectedYear && (
             <button
-              onClick={() => navigate(`/dashboard/${institution}/${subjectId}/take`)}
+              onClick={() => navigate(`/exam/${institution}/${subjectId}/take`)}
               className="rounded-full bg-primary px-4 py-1.5 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary/90"
             >
               {t("exam.start")}

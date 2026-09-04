@@ -203,7 +203,7 @@ function ExamBoardPage() {
 
   // Auto-submit when time runs out
   useEffect(() => {
-    if (timer.done) navigate(`/dashboard/${subjectId}/take/result`);
+    if (timer.done) navigate(`/exam/${subjectId}/take/result`);
   }, [timer.done]);
 
   const select = (id: number, value: string) =>
@@ -217,7 +217,7 @@ function ExamBoardPage() {
       setShowModal(true);
       return;
     }
-    navigate(`/dashboard/${subjectId}/take/result`);
+    navigate(`/exam/${subjectId}/take/result`);
   };
 
   if (!q) return null;
@@ -485,7 +485,7 @@ function ExamBoardPage() {
                   className="flex-1"
                   onClick={() => {
                     setShowModal(false);
-                    navigate(`/dashboard/${subjectId}/take/result`);
+                    navigate(`/exam/${subjectId}/take/result`);
                   }}
                 >
                   បញ្ជាក់
