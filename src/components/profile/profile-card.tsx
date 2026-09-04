@@ -64,7 +64,7 @@ export function ProfileCard({
   ];
 
   return (
-    <Card className={cn("mx-auto w-full max-w-2xl bg-card shadow-sm", className)}>
+    <Card className={cn("w-full bg-card shadow-sm", className)}>
       <CardHeader className="pb-4">
         <div className="flex items-start justify-between">
           <div className="flex items-start gap-4">

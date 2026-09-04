@@ -7,6 +7,7 @@ import HistoryPage from "./pages/history/page";
 import InfoPage from "./pages/info/page";
 import UniversityPage from "./pages/info/instituteId/page";
 import ErrorPage from "./pages/error/page";
+import ProfilePage from "./pages/profile/page";
 import ExamLayout from "./layouts/exam-layout";
 import ExamBoardPage from "./pages/exam/board/page";
 import ExamResultPage from "./pages/exam/result/page";
@@ -29,6 +30,7 @@ export function App() {
         <Route path="history" element={<HistoryPage />} />
         <Route path="info" element={<InfoPage />} />
         <Route path="info/:institution" element={<UniversityPage />} />
+        <Route path="profile" element={<ProfilePage />} />
         <Route path="*" element={<ErrorPage />} />
       </Route>
     </Routes>
