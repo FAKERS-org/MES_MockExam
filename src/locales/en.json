@@ -111,5 +111,11 @@
   "error.title": "404",
   "error.heading": "Page not found",
   "error.description": "The page you are looking for doesn't exist or has been moved.",
-  "error.goHome": "Back to dashboard"
+  "error.goHome": "Back to dashboard",
+  "profile.edit": "Edit",
+  "profile.personalInfo": "Personal information",
+  "profile.username": "Name",
+  "profile.gender": "Gender",
+  "profile.phone": "Phone",
+  "profile.email": "Email"
 }

@@ -111,5 +111,11 @@
   "error.title": "៤០៤",
   "error.heading": "រកទំព័រមិនឃើញ",
   "error.description": "ទំព័រដែលអ្នកកំពុងស្វែងរកមិនមាន ឬត្រូវបានផ្លាស់ប្តូរទីតាំង។",
-  "error.goHome": "ត្រឡប់ទៅផ្ទាំងព័ត៌មាន"
+  "error.goHome": "ត្រឡប់ទៅផ្ទាំងព័ត៌មាន",
+  "profile.edit": "កែប្រែ",
+  "profile.personalInfo": "ព័ត៌មានផ្ទាល់ខ្លួន",
+  "profile.username": "ឈ្មោះ",
+  "profile.gender": "ភេទ",
+  "profile.phone": "លេខទូរស័ព្ទ",
+  "profile.email": "អ៊ីមែល"
 }

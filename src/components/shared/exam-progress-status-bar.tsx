@@ -1,17 +1,24 @@
 import { Progress } from "@/components/ui/progress";
+import { cn } from "@/lib/utils";
 
-export function ExamProgressStatusBar() {
-  // These values can be easily dynamic based on your application state
-  const progressValue = 81;
-  const timeLabel = "79:10";
+export interface ExamProgressStatusBarProps {
+  progressValue?: number;
+  timeLabel?: string;
+  className?: string;
+}
 
+export function ExamProgressStatusBar({
+  progressValue = 81,
+  timeLabel = "79:10",
+  className,
+}: ExamProgressStatusBarProps) {
   return (
-    <div className="flex w-full max-w-xl items-center gap-4">
+    <div className={cn("flex w-full max-w-xl items-center gap-4", className)}>
       {/* Progress Bar Container */}
       <div className="flex-1">
         <Progress
           value={progressValue}
-          className="h-3 w-full bg-primary/20 rounded-full [&>div]:bg-primary [&>div]:rounded-full"
+          className="h-3 w-full rounded-full bg-primary/20 [&>div]:rounded-full [&>div]:bg-primary"
         />
       </div>
 

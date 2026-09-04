@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { LogOut } from "lucide-react";
 import type { ReactNode } from "react";
 import { useLanguage } from "@/lib/i18n";
+import { cn } from "@/lib/utils";
 
 export interface NavItem {
   icon: ReactNode;
@@ -10,13 +11,23 @@ export interface NavItem {
   to?: string;
 }
 
-interface SidebarProps {
+export interface SidebarProps {
   open: boolean;
   onClose: () => void;
   navItems: NavItem[];
+  logoSrc?: string;
+  logoAlt?: string;
+  className?: string;
 }
 
-function Sidebar({ open, onClose, navItems }: SidebarProps) {
+function Sidebar({
+  open,
+  onClose,
+  navItems,
+  logoSrc = "/images/MES-logo-horizontal.png",
+  logoAlt = "MES Logo",
+  className,
+}: SidebarProps) {
   const { t } = useLanguage();
   const navigate = useNavigate();
 
@@ -28,19 +39,15 @@ function Sidebar({ open, onClose, navItems }: SidebarProps) {
 
   return (
     <aside
-      className={`fixed inset-y-0 left-0 z-50 flex h-screen w-full flex-col overflow-hidden border-r border-sidebar-border bg-sidebar transition-[transform,width] duration-300 ease-in-out sm:w-64 lg:static ${
-        open
-          ? "translate-x-0 lg:w-64"
-          : "-translate-x-full lg:translate-x-0 lg:w-0"
-      }`}
+      className={cn(
+        "fixed inset-y-0 left-0 z-50 flex h-screen w-full flex-col overflow-hidden border-r border-sidebar-border bg-sidebar transition-[transform,width] duration-300 ease-in-out sm:w-64 lg:static",
+        open ? "translate-x-0 lg:w-64" : "-translate-x-full lg:translate-x-0 lg:w-0",
+        className
+      )}
     >
       <div className="flex h-full w-64 flex-col">
         <div className="flex items-center justify-center px-5 py-6">
-          <img
-            src="/images/MES-logo-horizontal.png"
-            alt="MES Logo"
-            className="h-7 w-auto object-contain"
-          />
+          <img src={logoSrc} alt={logoAlt} className="h-7 w-auto object-contain" />
         </div>
 
         <nav className="mt-2 flex-1 space-y-1 px-3">
@@ -49,11 +56,12 @@ function Sidebar({ open, onClose, navItems }: SidebarProps) {
               key={item.label}
               type="button"
               onClick={() => handleNav(item)}
-              className={`flex w-full items-center gap-3 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors ${
+              className={cn(
+                "flex w-full items-center gap-3 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors",
                 item.active
-                  ? "bg-sky-100 text-sky-900 dark:bg-sky-950/80 dark:text-sky-100 font-semibold"
+                  ? "bg-sky-100 font-semibold text-sky-900 dark:bg-sky-950/80 dark:text-sky-100"
                   : "text-muted-foreground hover:bg-accent hover:text-foreground"
-              }`}
+              )}
             >
               {item.icon}
               <span>{item.label}</span>

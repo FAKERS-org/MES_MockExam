@@ -1,10 +1,12 @@
 import { useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, Search } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { useLanguage, translations } from "@/lib/i18n";
 import { institutions } from "@/data/institutions";
 import DepartementInfoCard from "@/components/info/departement-info-card";
 import UniInfoSecondCard from "@/components/info/uni-info-second-card";
+import { SearchInput } from "@/components/shared/search-input";
+import { FilterChip } from "@/components/shared/filter-chip";
 
 export default function UniversityPage() {
   const { institution = "" } = useParams();
@@ -100,16 +102,11 @@ export default function UniversityPage() {
           {/* Toolbar: search + filters */}
           <div className="flex flex-col gap-3">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <div className="relative w-full sm:max-w-xs">
-                <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <input
-                  type="text"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder={t("topbar.searchPlaceholder")}
-                  className="w-full rounded-lg border border-border bg-card py-2 pl-9 pr-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
-                />
-              </div>
+              <SearchInput
+                value={query}
+                onChange={setQuery}
+                placeholder={t("topbar.searchPlaceholder")}
+              />
 
               {data.departments.length > 0 && (
                 <button
@@ -123,28 +120,17 @@ export default function UniversityPage() {
 
             {categories.length > 1 && (
               <div className="flex flex-wrap items-center gap-2">
-                <button
-                  onClick={() => setCategoryFilter(null)}
-                  className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
-                    categoryFilter === null
-                      ? "bg-primary text-white"
-                      : "bg-secondary text-secondary-foreground hover:bg-muted"
-                  }`}
-                >
+                <FilterChip active={categoryFilter === null} onClick={() => setCategoryFilter(null)}>
                   {t("filter.all")}
-                </button>
+                </FilterChip>
                 {categories.map((cat) => (
-                  <button
+                  <FilterChip
                     key={cat}
+                    active={categoryFilter === cat}
                     onClick={() => setCategoryFilter(categoryFilter === cat ? null : cat)}
-                    className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
-                      categoryFilter === cat
-                        ? "bg-primary text-white"
-                        : "bg-secondary text-secondary-foreground hover:bg-muted"
-                    }`}
                   >
                     {t(cat)}
-                  </button>
+                  </FilterChip>
                 ))}
               </div>
             )}

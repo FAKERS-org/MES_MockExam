@@ -1,8 +1,10 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useMemo, useState } from "react";
-import { ArrowLeft, FileCheck2, Search } from "lucide-react";
+import { ArrowLeft, FileCheck2 } from "lucide-react";
 import "flag-icons/css/flag-icons.min.css";
 import ExamCard from "@/components/dashboard/exam-card";
+import { SearchInput } from "@/components/shared/search-input";
+import { FilterChip } from "@/components/shared/filter-chip";
 import { useLanguage, type TranslationKey } from "@/lib/i18n";
 import { subjectsByInstitution } from "@/data/subjects";
 
@@ -55,46 +57,30 @@ export default function SubjectsPage() {
       </div>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="relative w-full sm:max-w-xs">
-          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder={t("topbar.searchPlaceholder")}
-            className="w-full rounded-lg border border-border bg-card py-2 pl-9 pr-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/20"
-          />
-        </div>
+        <SearchInput
+          value={query}
+          onChange={setQuery}
+          placeholder={t("topbar.searchPlaceholder")}
+        />
 
         {data.groups.some((g) => g.groupKey) && (
           <div className="flex flex-wrap items-center gap-2">
-            <button
-              onClick={() => setLangFilter(null)}
-              className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
-                langFilter === null
-                  ? "bg-primary text-white"
-                  : "bg-secondary text-secondary-foreground hover:bg-muted"
-              }`}
-            >
+            <FilterChip active={langFilter === null} onClick={() => setLangFilter(null)}>
               {t("filter.all")}
-            </button>
+            </FilterChip>
             {data.groups
               .filter((g) => g.groupKey)
               .map((g) => {
                 const groupKey = g.groupKey as string;
                 return (
-                  <button
+                  <FilterChip
                     key={groupKey}
+                    active={langFilter === groupKey}
                     onClick={() => setLangFilter(langFilter === groupKey ? null : groupKey)}
-                    className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
-                      langFilter === groupKey
-                        ? "bg-primary text-white"
-                        : "bg-secondary text-secondary-foreground hover:bg-muted"
-                    }`}
                   >
                     {g.flagCode && <span className={`fi fi-${g.flagCode} rounded-sm text-xs`} />}
                     {t(groupKey as TranslationKey)}
-                  </button>
+                  </FilterChip>
                 );
               })}
           </div>

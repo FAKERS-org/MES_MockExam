@@ -1,16 +1,18 @@
 import { CheckCircle2, ClipboardList, Clock, Star } from "lucide-react";
 import type { ReactNode } from "react";
 import { useLanguage } from "@/lib/i18n";
+import { cn } from "@/lib/utils";
 
-interface ExamCardProps {
-  title?: string;
+export interface ExamCardProps {
+  title?: ReactNode;
   icon?: ReactNode;
-  typeLabel?: string;
+  typeLabel?: ReactNode;
   questionCount?: number;
   durationMinutes?: number;
   marks?: number;
-  buttonText?: string;
+  buttonText?: ReactNode;
   onStart?: () => void;
+  className?: string;
 }
 
 function ExamCard({
@@ -22,10 +24,16 @@ function ExamCard({
   marks,
   buttonText,
   onStart,
+  className,
 }: ExamCardProps) {
   const { t } = useLanguage();
   return (
-    <div className="flex flex-col gap-4 rounded-2xl border bg-card p-5 text-card-foreground shadow-sm sm:flex-row sm:items-center sm:justify-between">
+    <div
+      className={cn(
+        "flex flex-col gap-4 rounded-2xl border bg-card p-5 text-card-foreground shadow-sm sm:flex-row sm:items-center sm:justify-between",
+        className
+      )}
+    >
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
         <div className="flex size-20 shrink-0 items-center justify-center">
           {icon ?? <ClipboardList className="size-20 text-muted-foreground" />}

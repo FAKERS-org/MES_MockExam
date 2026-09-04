@@ -3,57 +3,99 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
-// Dummy data for the 5 options based on the image context
-const quizOptions = [
-  { id: "A", equation: "f'' - 3f' + 2f = 0" },
-  { id: "B", equation: "2f'' + 3f' + f = 0" },
-  { id: "C", equation: "f'' - 3f' - 2f = 0" },
-  { id: "D", equation: "2f'' - 3f' + f = 0" }, // Correct/Selected option
-  { id: "E", equation: "2f'' - 3f' - f = 0" },
+export interface QuizOption {
+  id: string;
+  text: React.ReactNode;
+}
+
+export interface QuizBoardProps {
+  questionTypeLabel?: React.ReactNode;
+  instructionLabel?: React.ReactNode;
+  questionText?: React.ReactNode;
+  options?: QuizOption[];
+  selectedValue?: string;
+  onValueChange?: (value: string) => void;
+  progressText?: React.ReactNode;
+  submitButtonText?: React.ReactNode;
+  onSubmit?: () => void;
+  className?: string;
+}
+
+const defaultOptions: QuizOption[] = [
+  { id: "A", text: <MathExpression>f'' - 3f' + 2f = 0</MathExpression> },
+  { id: "B", text: <MathExpression>2f'' + 3f' + f = 0</MathExpression> },
+  { id: "C", text: <MathExpression>f'' - 3f' - 2f = 0</MathExpression> },
+  { id: "D", text: <MathExpression>2f'' - 3f' + f = 0</MathExpression> },
+  { id: "E", text: <MathExpression>2f'' - 3f' - f = 0</MathExpression> },
 ];
 
-export default function QuizBoard() {
-  // Default to "D" as shown selected in the image
-  const [selectedAnswer, setSelectedAnswer] = useState<string>("D");
+export default function QuizBoard({
+  questionTypeLabel = "Multiple Choice",
+  instructionLabel = "Select 1 correct answer",
+  questionText = (
+    <>
+      Function <MathExpression>f(x) = 3eˣ - 2e²x</MathExpression> satisfies which differential equation?
+    </>
+  ),
+  options = defaultOptions,
+  selectedValue: controlledValue,
+  onValueChange,
+  progressText = "3/30",
+  submitButtonText = "Confirm",
+  onSubmit,
+  className,
+}: QuizBoardProps) {
+  const [internalValue, setInternalValue] = useState<string>("D");
+  const selectedAnswer = controlledValue ?? internalValue;
+
+  const handleSelect = (val: string) => {
+    if (onValueChange) {
+      onValueChange(val);
+    } else {
+      setInternalValue(val);
+    }
+  };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 p-4 sm:p-8">
+    <div className={cn("flex min-h-screen items-center justify-center p-4 sm:p-8", className)}>
       <Card className="w-full max-w-2xl shadow-md">
         <CardHeader className="border-b pb-4">
           <div className="flex items-center justify-between">
-            <span className="text-sm font-medium text-gray-500">
-              คำถามปรนัย
+            <span className="text-sm font-medium text-muted-foreground">
+              {questionTypeLabel}
             </span>
-            <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600">
-              เลือกคำตอบที่ถูกต้องเพียง 1 ข้อ
+            <span className="rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground">
+              {instructionLabel}
             </span>
           </div>
         </CardHeader>
 
         <CardContent className="pt-6">
           {/* Question Text */}
-          <div className="mb-8 text-lg font-medium leading-relaxed text-gray-800">
-            ฟังก์ชัน <MathExpression>f(x) = 3eˣ - 2e²ˣ</MathExpression> สอดคล้องกับสมการเชิงอนุพันธ์ใด
+          <div className="mb-8 text-lg font-medium leading-relaxed text-foreground">
+            {questionText}
           </div>
 
           {/* Options */}
           <RadioGroup
             value={selectedAnswer}
-            onValueChange={setSelectedAnswer}
+            onValueChange={handleSelect}
             className="space-y-3"
           >
-            {quizOptions.map((option) => {
+            {options.map((option) => {
               const isSelected = selectedAnswer === option.id;
               return (
                 <div
                   key={option.id}
-                  onClick={() => setSelectedAnswer(option.id)}
-                  className={`flex cursor-pointer items-center space-x-3 rounded-lg border p-4 transition-colors ${
+                  onClick={() => handleSelect(option.id)}
+                  className={cn(
+                    "flex cursor-pointer items-center space-x-3 rounded-lg border p-4 transition-colors",
                     isSelected
                       ? "border-primary bg-primary/5"
-                      : "border-gray-200 hover:bg-gray-50"
-                  }`}
+                      : "border-border hover:bg-muted/50"
+                  )}
                 >
                   <RadioGroupItem
                     value={option.id}
@@ -62,10 +104,10 @@ export default function QuizBoard() {
                   />
                   <Label
                     htmlFor={`option-${option.id}`}
-                    className="flex-1 cursor-pointer text-base text-gray-700"
+                    className="flex-1 cursor-pointer text-base text-foreground"
                   >
-                    <span className="font-semibold mr-2">{option.id}.</span>
-                    <MathExpression>{option.equation}</MathExpression>
+                    <span className="mr-2 font-semibold">{option.id}.</span>
+                    {option.text}
                   </Label>
                 </div>
               );
@@ -74,9 +116,9 @@ export default function QuizBoard() {
         </CardContent>
 
         <CardFooter className="flex items-center justify-between border-t pt-4">
-          <span className="text-sm font-semibold text-gray-500">3/30</span>
-          <Button size="lg" className="px-8">
-            ยืนยัน
+          <span className="text-sm font-semibold text-muted-foreground">{progressText}</span>
+          <Button size="lg" className="px-8" onClick={onSubmit}>
+            {submitButtonText}
           </Button>
         </CardFooter>
       </Card>
@@ -84,11 +126,6 @@ export default function QuizBoard() {
   );
 }
 
-/**
- * Simple wrapper component to render math text with proper styling.
- * In a real app, you might want to use a library like KaTeX 
- * to render the formulas properly.
- */
-function MathExpression({ children }: { children: React.ReactNode }) {
+export function MathExpression({ children }: { children: React.ReactNode }) {
   return <span className="font-serif italic">{children}</span>;
 }

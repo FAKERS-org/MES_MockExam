@@ -1,25 +1,32 @@
 import { ChevronDown } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
+import { cn } from "@/lib/utils";
 import type { Department } from "@/data/institutions";
 
-interface DepartementInfoCardProps {
+export interface DepartementInfoCardProps {
   department: Department;
   logoSize?: number;
-  open: boolean;
-  onToggle: () => void;
+  open?: boolean;
+  onToggle?: () => void;
+  className?: string;
 }
 
 const DepartementInfoCard: React.FC<DepartementInfoCardProps> = ({
   department,
   logoSize = 48,
-  open,
+  open = false,
   onToggle,
+  className,
 }) => {
   const { t } = useLanguage();
 
   return (
     <div
-      className="w-full h-fit cursor-pointer select-none rounded-2xl border bg-card p-5 shadow-sm transition-colors hover:bg-accent/50"
+      className={cn(
+        "h-fit w-full select-none rounded-2xl border bg-card p-5 shadow-sm transition-colors hover:bg-accent/50",
+        onToggle && "cursor-pointer",
+        className
+      )}
       onClick={onToggle}
     >
       <div className="flex items-center justify-between gap-3">
@@ -38,7 +45,10 @@ const DepartementInfoCard: React.FC<DepartementInfoCardProps> = ({
           </div>
         </div>
         <ChevronDown
-          className={`h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+          className={cn(
+            "h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-300",
+            open && "rotate-180"
+          )}
         />
       </div>
 
