@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, Clock, ArrowLeft } from "lucide-react";
+import { MathExpression } from "@/components/ui/math-expression";
 
 function ExamResultPage() {
   const navigate = useNavigate();
@@ -24,15 +25,21 @@ function ExamResultPage() {
         <CardContent className="pt-6">
           <div className="grid grid-cols-3 gap-4">
             <div className="flex flex-col items-center gap-1 rounded-lg bg-muted/40 p-4">
-              <span className="text-2xl font-bold text-primary">8/10</span>
+              <span className="text-2xl font-bold text-primary">
+                <MathExpression>{"\\dfrac{8}{10}"}</MathExpression>
+              </span>
               <span className="text-xs text-muted-foreground">ចម្លើយត្រូវ</span>
             </div>
             <div className="flex flex-col items-center gap-1 rounded-lg bg-muted/40 p-4">
-              <span className="text-2xl font-bold text-destructive">2/10</span>
+              <span className="text-2xl font-bold text-destructive">
+                <MathExpression>{"\\dfrac{2}{10}"}</MathExpression>
+              </span>
               <span className="text-xs text-muted-foreground">ចម្លើយខុស</span>
             </div>
             <div className="flex flex-col items-center gap-1 rounded-lg bg-muted/40 p-4">
-              <span className="text-2xl font-bold text-foreground">80%</span>
+              <span className="text-2xl font-bold text-foreground">
+                <MathExpression>{"80\\%"}</MathExpression>
+              </span>
               <span className="text-xs text-muted-foreground">ពិន្ទុ</span>
             </div>
           </div>
