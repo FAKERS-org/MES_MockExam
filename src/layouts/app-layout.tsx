@@ -21,7 +21,7 @@ function AppLayout() {
     { icon: <LayoutGrid className="size-4" />, label: t("nav.dashboard"), active: isDashboard, to: "/" },
     { icon: <History className="size-4" />, label: t("nav.history"), active: pathname === "/history", to: "/history" },
     { icon: <FileText className="size-4" />, label: t("nav.info"), active: isInfo, to: "/info" },
-    { icon: <User className="size-4" />, label: t("nav.account"), active: pathname === "/profile", to: "/profile" },
+    { icon: <User className="size-4" />, label: t("nav.profile"), active: pathname === "/profile", to: "/profile" },
   ];
 
   return (
