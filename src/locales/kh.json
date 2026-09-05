@@ -1,5 +1,6 @@
 {
   "nav.dashboard": "ផ្ទាំងព័ត៌មាន",
+  "nav.exam": "ការប្រឡង",
   "nav.history": "ប្រវត្តិការប្រឡង",
   "nav.info": "ព័ត៌មាន",
   "nav.account": "គណនី",
@@ -48,6 +49,9 @@
   "subjects.ifl.korean": "កូរ៉េ",
   "subjects.ifl.entranceExam": "ការប្រឡងចូលរៀន",
   "subjects.ifl.allLanguages": "ការប្រឡងរួមមួយគ្របដណ្តប់លើមុខវិជ្ជាភាសាទាំងអស់",
+  "exam.page.title": "ការប្រឡងដែលអាចប្រឡងបើក",
+  "exam.page.subtitle": "ជ្រើសរើ មុខវិជ្ជាដើម្បីចាប់ផ្តើមការប្រឡងសាកល្បង",
+  "exam.institutions.subtitle": "ជ្រើសរើ ឥគ្គស្ថាប័នដើម្បីមើលការប្រឡងដែលមាន",
   "exam.defaultTitle": "ការបែងចែកពិសោធន៍",
   "examType.mcq": "ពហុជ្រើសរើស",
   "exam.questionCount": "{count} សំណួរ",

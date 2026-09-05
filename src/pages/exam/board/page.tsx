@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -24,6 +25,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { EXAM_CONFIG } from "@/config/exam.config";
+import { MathExpression } from "@/components/ui/math-expression";
 
 type LayoutMode = "compact" | "normal" | "fullscreen";
 
@@ -31,14 +33,14 @@ type LayoutMode = "compact" | "normal" | "fullscreen";
 
 interface Question {
   id: number;
-  text: string;
-  options: { id: string; text: string }[];
+  text: React.ReactNode;
+  options: { id: string; text: React.ReactNode }[];
 }
 
 const QUESTIONS: Question[] = [
   {
     id: 1,
-    text: "ម៉ាទ្រីស A = [[1,2],[3,4]] មាន determinant ស្មើនឹង?",
+    text: <MathExpression>{"A = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix},\\; \\det(A) = ?"}</MathExpression>,
     options: [
       { id: "A", text: "-2" },
       { id: "B", text: "2" },
@@ -49,18 +51,18 @@ const QUESTIONS: Question[] = [
   },
   {
     id: 2,
-    text: "f(x) = 3e^x - 2e^(2x) ជាចម្លើយនៃសមីការឌីផេរ៉ង់ស្យែលណា?",
+    text: <MathExpression>{"f(x) = 3e^{x} - 2e^{2x} ជាកំណត់សមីការឌីផេរ៉ង់ស្យែលណា?"}</MathExpression>,
     options: [
-      { id: "A", text: "f'' - 3f' + 2f = 0" },
-      { id: "B", text: "2f'' + 3f' + f = 0" },
-      { id: "C", text: "f'' - 3f' - 2f = 0" },
-      { id: "D", text: "2f'' - 3f' + f = 0" },
-      { id: "E", text: "2f'' - 3f' - f = 0" },
+      { id: "A", text: <MathExpression>{"f'' - 3f' + 2f = 0"}</MathExpression> },
+      { id: "B", text: <MathExpression>{"2f'' + 3f' + f = 0"}</MathExpression> },
+      { id: "C", text: <MathExpression>{"f'' - 3f' - 2f = 0"}</MathExpression> },
+      { id: "D", text: <MathExpression>{"2f'' - 3f' + f = 0"}</MathExpression> },
+      { id: "E", text: <MathExpression>{"2f'' - 3f' - f = 0"}</MathExpression> },
     ],
   },
   {
     id: 3,
-    text: "វ៉ិចទ័រ u=(3,4) និង v=(1,-2) មាន dot product ស្មើនឹង?",
+    text: <MathExpression>{"\\vec{u} = (3,4),\\; \\vec{v} = (1,-2),\\; \\vec{u} \\cdot \\vec{v} = ?"}</MathExpression>,
     options: [
       { id: "A", text: "-5" },
       { id: "B", text: "5" },
@@ -71,7 +73,7 @@ const QUESTIONS: Question[] = [
   },
   {
     id: 4,
-    text: "log_2(32) + log_3(81) = ?",
+    text: <MathExpression>{"\\log_2(32) + \\log_3(81) = ?"}</MathExpression>,
     options: [
       { id: "A", text: "7" },
       { id: "B", text: "8" },
@@ -82,62 +84,62 @@ const QUESTIONS: Question[] = [
   },
   {
     id: 5,
-    text: "ផ្ទៃរង្វង់ដែលមានអង្កត់ផ្ចិត 10 cm គឺ?",
+    text: <MathExpression>{"រង្វង់មួយមានអង្កត់ផ្ចិត $d = 10\\;\\text{cm}$ ក្រឡាផ្ទៃរបស់វាគឺ?"}</MathExpression>,
     options: [
-      { id: "A", text: "25π cm²" },
-      { id: "B", text: "50π cm²" },
-      { id: "C", text: "100π cm²" },
-      { id: "D", text: "10π cm²" },
-      { id: "E", text: "75π cm²" },
+      { id: "A", text: <MathExpression>{"25\\pi\\;\\text{cm}^2"}</MathExpression> },
+      { id: "B", text: <MathExpression>{"50\\pi\\;\\text{cm}^2"}</MathExpression> },
+      { id: "C", text: <MathExpression>{"100\\pi\\;\\text{cm}^2"}</MathExpression> },
+      { id: "D", text: <MathExpression>{"10\\pi\\;\\text{cm}^2"}</MathExpression> },
+      { id: "E", text: <MathExpression>{"75\\pi\\;\\text{cm}^2"}</MathExpression> },
     ],
   },
   {
     id: 6,
-    text: "sin²(30°) + cos²(30°) = ?",
+    text: <MathExpression>{"\\sin^2(30°) + \\cos^2(30°) = ?"}</MathExpression>,
     options: [
       { id: "A", text: "0" },
       { id: "B", text: "1" },
-      { id: "C", text: "1/2" },
-      { id: "D", text: "√3/2" },
+      { id: "C", text: <MathExpression>{"\\dfrac{1}{2}"}</MathExpression> },
+      { id: "D", text: <MathExpression>{"\\dfrac{\\sqrt{3}}{2}"}</MathExpression> },
       { id: "E", text: "2" },
     ],
   },
   {
     id: 7,
-    text: "lim(x→0) sin(x)/x = ?",
+    text: <MathExpression>{"\\displaystyle\\lim_{x\\to 0} \\dfrac{\\sin(x)}{x} = ?"}</MathExpression>,
     options: [
       { id: "A", text: "0" },
       { id: "B", text: "1" },
-      { id: "C", text: "∞" },
+      { id: "C", text: "\\infty" },
       { id: "D", text: "-1" },
-      { id: "E", text: "មិនមែន" },
+      { id: "E", text: <MathExpression>{"\\text{មិនមែន}"}</MathExpression> },
     ],
   },
   {
     id: 8,
-    text: "√(x² + 6x + 9) ចំពោះ x > 0 ស្មើនឹង?",
+    text: <MathExpression>{"\\sqrt{x^2 + 6x + 9} \\text{ ចំពោះ } x > 0 \\text{ ស្មើនឹង?}"}</MathExpression>,
     options: [
       { id: "A", text: "x + 3" },
       { id: "B", text: "x - 3" },
-      { id: "C", text: "x² + 3" },
-      { id: "D", text: "2x + 3" },
-      { id: "E", text: "√(x²) + 3" },
+      { id: "C", text: <MathExpression>{"x^2 + 3"}</MathExpression> },
+      { id: "D", text: <MathExpression>{"2x + 3"}</MathExpression> },
+      { id: "E", text: <MathExpression>{"\\sqrt{x^2} + 3"}</MathExpression> },
     ],
   },
   {
     id: 9,
-    text: "ម៉ាទ្រីស [[2,1],[1,1]] មាន inverse ឬទេ?",
+    text: <MathExpression>{"A = \\begin{pmatrix} 2 & 1 \\\\ 1 & 1 \\end{pmatrix} មានច្រាស (inverse) ឬទេ?"}</MathExpression>,
     options: [
       { id: "A", text: "មាន" },
       { id: "B", text: "មិនមាន" },
-      { id: "C", text: "មិនអាចកំណត់" },
+      { id: "C", text: <MathExpression>{"\\text{មិនអាចកំណត់}"}</MathExpression> },
       { id: "D", text: "ស្មើសូន្យ" },
       { id: "E", text: "ស្មើមួយ" },
     ],
   },
   {
     id: 10,
-    text: "តើចំនួនប៉ាន់ 5! (5 ហ្វាក់ទូរ) ស្មើនឹង?",
+    text: <MathExpression>{"5! \\text{ (5 factorial)} = ?"}</MathExpression>,
     options: [
       { id: "A", text: "20" },
       { id: "B", text: "60" },
@@ -452,7 +454,7 @@ function ExamBoardPage() {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => (institution && subjectId ? navigate(`/dashboard/${institution}/${subjectId}`) : navigate(-1))}
+              onClick={() => (institution && subjectId ? navigate(`/exam/${institution}/${subjectId}`) : navigate(-1))}
               className="gap-1 text-muted-foreground"
             >
               <X className="size-4" /> ចាកចេញ

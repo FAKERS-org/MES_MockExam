@@ -17,7 +17,7 @@ function InstitutionCard({ institution, to, className }: InstitutionCardProps) {
   const count = getSubjectCount(institution.id);
   return (
     <Link
-      to={to ?? `/dashboard/${institution.id}`}
+      to={to ?? `/exam/${institution.id}`}
       className={cn(
         "flex flex-col items-center rounded-xl border bg-card p-6 text-center shadow-sm transition-shadow hover:shadow-md",
         className

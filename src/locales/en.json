@@ -1,5 +1,6 @@
 {
   "nav.dashboard": "Dashboard",
+  "nav.exam": "Exam",
   "nav.history": "Exam History",
   "nav.info": "Information",
   "nav.account": "Account",
@@ -48,6 +49,9 @@
   "subjects.ifl.korean": "Korean",
   "subjects.ifl.entranceExam": "Entrance Exam",
   "subjects.ifl.allLanguages": "One combined test covering all language subjects",
+  "exam.page.title": "Available Exams",
+  "exam.page.subtitle": "Choose a subject to start your mock exam",
+  "exam.institutions.subtitle": "Choose your institution to view available exams",
   "exam.defaultTitle": "Mock Examination",
   "examType.mcq": "Multiple Choice",
   "exam.questionCount": "{count} questions",

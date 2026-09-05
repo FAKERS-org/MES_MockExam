@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import { FileText, History, LayoutGrid, User } from "lucide-react";
+import { FileText, History, LayoutGrid, User, ClipboardList } from "lucide-react";
 import Sidebar, { type NavItem } from "@/components/shared/sidebar";
 import TopBar from "@/components/shared/top-bar";
 import Breadcrumbs from "@/components/shared/breadcrumbs";
@@ -13,12 +13,13 @@ function AppLayout() {
   const { t } = useLanguage();
   const { pathname } = useLocation();
 
-  const isDashboard = pathname === "/" || pathname.startsWith("/dashboard");
-
+  const isDashboard = pathname === "/";
+  const isExam = pathname.startsWith("/exam");
   const isInfo = pathname === "/info" || pathname.startsWith("/info/");
 
   const navItems: NavItem[] = [
     { icon: <LayoutGrid className="size-4" />, label: t("nav.dashboard"), active: isDashboard, to: "/" },
+    { icon: <ClipboardList className="size-4" />, label: t("nav.exam"), active: isExam, to: "/exam" },
     { icon: <History className="size-4" />, label: t("nav.history"), active: pathname === "/history", to: "/history" },
     { icon: <FileText className="size-4" />, label: t("nav.info"), active: isInfo, to: "/info" },
     { icon: <User className="size-4" />, label: t("nav.profile"), active: pathname === "/profile", to: "/profile" },

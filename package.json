@@ -19,6 +19,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "flag-icons": "^7.5.0",
+    "katex": "^0.18.5",
     "lucide-react": "^1",
     "radix-ui": "^1.6.7",
     "react": "^19",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "@types/bun": "latest",
+    "@types/katex": "^0.16.8",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "tailwindcss": "^4.1.11"

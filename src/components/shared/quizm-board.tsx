@@ -4,6 +4,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { MathExpression } from "@/components/ui/math-expression";
 
 export interface QuizOption {
   id: string;
@@ -24,11 +25,11 @@ export interface QuizBoardProps {
 }
 
 const defaultOptions: QuizOption[] = [
-  { id: "A", text: <MathExpression>f'' - 3f' + 2f = 0</MathExpression> },
-  { id: "B", text: <MathExpression>2f'' + 3f' + f = 0</MathExpression> },
-  { id: "C", text: <MathExpression>f'' - 3f' - 2f = 0</MathExpression> },
-  { id: "D", text: <MathExpression>2f'' - 3f' + f = 0</MathExpression> },
-  { id: "E", text: <MathExpression>2f'' - 3f' - f = 0</MathExpression> },
+  { id: "A", text: <MathExpression>{"f'' - 3f' + 2f = 0"}</MathExpression> },
+  { id: "B", text: <MathExpression>{"2f'' + 3f' + f = 0"}</MathExpression> },
+  { id: "C", text: <MathExpression>{"f'' - 3f' - 2f = 0"}</MathExpression> },
+  { id: "D", text: <MathExpression>{"2f'' - 3f' + f = 0"}</MathExpression> },
+  { id: "E", text: <MathExpression>{"2f'' - 3f' - f = 0"}</MathExpression> },
 ];
 
 export default function QuizBoard({
@@ -36,7 +37,7 @@ export default function QuizBoard({
   instructionLabel = "Select 1 correct answer",
   questionText = (
     <>
-      Function <MathExpression>f(x) = 3eˣ - 2e²x</MathExpression> satisfies which differential equation?
+      Function <MathExpression>{"f(x) = 3e^{x} - 2e^{2x}"}</MathExpression> satisfies which differential equation?
     </>
   ),
   options = defaultOptions,
@@ -124,8 +125,4 @@ export default function QuizBoard({
       </Card>
     </div>
   );
-}
-
-export function MathExpression({ children }: { children: React.ReactNode }) {
-  return <span className="font-serif italic">{children}</span>;
 }

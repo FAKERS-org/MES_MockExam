@@ -37,15 +37,15 @@ function useDefaultCrumbs(): Crumb[] {
     } else {
       crumbs.push({ label: t("nav.info") });
     }
-  } else if (segments[0] === "dashboard") {
-    crumbs.push({ label: t("nav.dashboard"), to: "/" });
+  } else if (segments[0] === "exam") {
+    crumbs.push({ label: t("nav.exam"), to: "/exam" });
     const [institution, subjectId, action] = segments.slice(1);
 
     if (institution) {
       const instKey = institutionLabels[institution] as TranslationKey | undefined;
       crumbs.push({
         label: instKey ? t(instKey) : decodeURIComponent(institution),
-        to: `/dashboard/${institution}`,
+        to: `/exam/${institution}`,
       });
 
       const found = subjectId ? findSubject(institution, subjectId) : null;
@@ -53,15 +53,13 @@ function useDefaultCrumbs(): Crumb[] {
         if (action === "take") {
           crumbs.push({
             label: t(found.subject.titleKey),
-            to: `/dashboard/${institution}/${subjectId}`,
+            to: `/exam/${institution}/${subjectId}`,
           });
           crumbs.push({ label: t("breadcrumbs.taking") });
         } else {
           crumbs.push({ label: t(found.subject.titleKey) });
         }
       }
-    } else {
-      crumbs.push({ label: t("nav.dashboard") });
     }
   }
 

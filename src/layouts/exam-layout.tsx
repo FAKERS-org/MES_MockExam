@@ -55,7 +55,7 @@ function ExamTopBar() {
           variant="ghost"
           size="icon"
           className="size-8 text-muted-foreground"
-          onClick={() => (institution && subjectId ? navigate(`/dashboard/${institution}/${subjectId}`) : navigate("/"))}
+          onClick={() => (institution && subjectId ? navigate(`/exam/${institution}/${subjectId}`) : navigate("/"))}
           aria-label="Close"
         >
           <X className="size-4" />

@@ -20,11 +20,11 @@ export default function ExamOptionsPage() {
     <div className="space-y-6">
       <div>
         <Link
-          to={`/dashboard/${institution}`}
+          to={`/exam/${institution}`}
           className="mb-3 inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
         >
           <ArrowLeft className="h-4 w-4" />
-          {t("nav.dashboard")}
+          {t("nav.exam")}
         </Link>
         <h1 className="text-xl font-bold text-foreground">{subjectTitle}</h1>
         <p className="mt-1 text-sm text-muted-foreground">{t("exam.options.subtitle")}</p>

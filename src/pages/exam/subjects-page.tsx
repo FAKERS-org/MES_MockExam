@@ -8,7 +8,7 @@ import { FilterChip } from "@/components/shared/filter-chip";
 import { useLanguage, type TranslationKey } from "@/lib/i18n";
 import { subjectsByInstitution } from "@/data/subjects";
 
-export default function SubjectsPage() {
+export default function ExamSubjectsPage() {
   const { institution = "" } = useParams();
   const navigate = useNavigate();
   const { t } = useLanguage();
@@ -35,8 +35,8 @@ export default function SubjectsPage() {
     return (
       <div className="flex flex-col items-center gap-4 py-16 text-center">
         <p className="text-sm text-muted-foreground">{t("exam.subjectNotFound")}</p>
-        <Link to="/" className="text-sm font-medium text-primary hover:underline">
-          {t("nav.dashboard")}
+        <Link to="/exam" className="text-sm font-medium text-primary hover:underline">
+          {t("nav.exam")}
         </Link>
       </div>
     );
@@ -46,11 +46,11 @@ export default function SubjectsPage() {
     <div className="space-y-6">
       <div>
         <Link
-          to="/"
+          to="/exam"
           className="mb-3 inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
         >
           <ArrowLeft className="h-4 w-4" />
-          {t("nav.dashboard")}
+          {t("nav.exam")}
         </Link>
         <h1 className="text-xl font-bold text-foreground">{t(data.titleKey)}</h1>
         <p className="mt-1 text-sm text-muted-foreground">{t("overview.subjects", { count: subjectCount })}</p>
@@ -111,7 +111,7 @@ export default function SubjectsPage() {
                   questionCount={subject.questionCount}
                   durationMinutes={subject.durationMinutes}
                   marks={subject.marks}
-                  onStart={() => navigate(`/dashboard/${institution}/${subject.id}`)}
+                  onStart={() => navigate(`/exam/${institution}/${subject.id}`)}
                 />
               );
             })}
@@ -123,7 +123,7 @@ export default function SubjectsPage() {
                 questionCount={group.subjects.reduce((sum, s) => sum + s.questionCount, 0)}
                 durationMinutes={group.subjects.reduce((sum, s) => sum + s.durationMinutes, 0)}
                 marks={group.subjects.reduce((sum, s) => sum + (s.marks ?? 0), 0)}
-                onStart={() => navigate(`/dashboard/${institution}/${group.subjects[0]!.id}`)}
+                onStart={() => navigate(`/exam/${institution}/${group.subjects[0]!.id}`)}
               />
             )}
           </div>
