@@ -44,33 +44,6 @@ export const institutions: Institution[] = [
       },
     ],
   },
-  {
-    id: "uhs",
-    nameKey: "overview.institutions.usha",
-    descriptionKey: "info.about.institutions.uhs",
-    logo: "/images/UHS-logo.png",
-    website: "uhs.edu.kh",
-    address: "73 Preah Monivong Blvd, Phnom Penh",
-    departments: [],
-  },
-  {
-    id: "rupp",
-    nameKey: "overview.institutions.rupp",
-    descriptionKey: "info.about.institutions.rupp",
-    logo: "/images/RUPP-logo.png",
-    website: "rupp.edu.kh",
-    address: "Russian Federation Boulevard (St. 110), Toul Kork, Phnom Penh",
-    departments: [],
-  },
-  {
-    id: "ifl",
-    nameKey: "overview.institutions.ifl",
-    descriptionKey: "info.about.institutions.ifl",
-    logo: "/images/IFL-logo.png",
-    website: "ifl.rupp.edu.kh",
-    address: "Russian Federation Boulevard (St. 110), Toul Kork, Phnom Penh",
-    departments: [],
-  },
 ];
 
 export const institutionLabels: Record<string, TranslationKey> = Object.fromEntries(

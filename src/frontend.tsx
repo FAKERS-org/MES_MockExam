@@ -11,8 +11,8 @@ import { BrowserRouter } from "react-router-dom";
 import { App } from "./App";
 import { LanguageProvider } from "@/lib/i18n";
 
-const elem = document.getElementById("root");
-if (!elem) {
+const element = document.getElementById("root");
+if (!element) {
   throw new Error("Root element #root not found");
 }
 const app = (
@@ -26,4 +26,4 @@ const app = (
 );
 
 // https://bun.com/docs/bundler/hot-reloading#import-meta-hot-data
-(import.meta.hot.data.root ??= createRoot(elem)).render(app);
+(import.meta.hot.data.root ??= createRoot(element)).render(app);
