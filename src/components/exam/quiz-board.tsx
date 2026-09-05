@@ -36,9 +36,7 @@ export default function QuizBoard({
   questionTypeLabel = "Multiple Choice",
   instructionLabel = "Select 1 correct answer",
   questionText = (
-    <>
-      Function <MathExpression>{"f(x) = 3e^{x} - 2e^{2x}"}</MathExpression> satisfies which differential equation?
-    </>
+    <MathExpression displayMode>{"f(x) = 3e^{x} - 2e^{2x} \\; \\text{is a solution to which differential equation?}"}</MathExpression>
   ),
   options = defaultOptions,
   selectedValue: controlledValue,

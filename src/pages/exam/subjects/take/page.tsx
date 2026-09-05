@@ -84,7 +84,7 @@ const QUESTIONS: Question[] = [
   },
   {
     id: 5,
-    text: <MathExpression>{"រង្វង់មួយមានអង្កត់ផ្ចិត $d = 10\\;\\text{cm}$ ក្រឡាផ្ទៃរបស់វាគឺ?"}</MathExpression>,
+    text: <MathExpression>{"រង្វង់មួយមានអង្កត់ផ្ចិត \\; d = 10\\;\\text{cm} \\; \\text{ក្រឡាផ្ទៃរបស់វាគឺ?}"}</MathExpression>,
     options: [
       { id: "A", text: <MathExpression>{"25\\pi\\;\\text{cm}^2"}</MathExpression> },
       { id: "B", text: <MathExpression>{"50\\pi\\;\\text{cm}^2"}</MathExpression> },
