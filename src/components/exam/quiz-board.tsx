@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { MathExpression } from "@/components/ui/math-expression";
+import { DEFAULT_QUIZ_OPTIONS } from "@/data/quiz-defaults";
 
 export interface QuizOption {
   id: string;
@@ -24,13 +25,7 @@ export interface QuizBoardProps {
   className?: string;
 }
 
-const defaultOptions: QuizOption[] = [
-  { id: "A", text: <MathExpression>{"f'' - 3f' + 2f = 0"}</MathExpression> },
-  { id: "B", text: <MathExpression>{"2f'' + 3f' + f = 0"}</MathExpression> },
-  { id: "C", text: <MathExpression>{"f'' - 3f' - 2f = 0"}</MathExpression> },
-  { id: "D", text: <MathExpression>{"2f'' - 3f' + f = 0"}</MathExpression> },
-  { id: "E", text: <MathExpression>{"2f'' - 3f' - f = 0"}</MathExpression> },
-];
+const defaultOptions = DEFAULT_QUIZ_OPTIONS;
 
 export default function QuizBoard({
   questionTypeLabel = "Multiple Choice",

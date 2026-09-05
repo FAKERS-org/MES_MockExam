@@ -44,6 +44,33 @@ export const institutions: Institution[] = [
       },
     ],
   },
+  {
+    id: "usha",
+    nameKey: "overview.institutions.usha",
+    descriptionKey: "info.about.institutions.uhs",
+    logo: "/images/UHS-logo.png",
+    website: "uhs.edu.kh",
+    address: "Phnom Penh, Cambodia",
+    departments: [],
+  },
+  {
+    id: "rupp",
+    nameKey: "overview.institutions.rupp",
+    descriptionKey: "info.about.institutions.rupp",
+    logo: "/images/RUPP-logo.png",
+    website: "rupp.edu.kh",
+    address: "Phnom Penh, Cambodia",
+    departments: [],
+  },
+  {
+    id: "ifl",
+    nameKey: "overview.institutions.ifl",
+    descriptionKey: "info.about.institutions.ifl",
+    logo: "/images/IFL-logo.png",
+    website: "ifl.rupp.edu.kh",
+    address: "Phnom Penh, Cambodia",
+    departments: [],
+  },
 ];
 
 export const institutionLabels: Record<string, TranslationKey> = Object.fromEntries(

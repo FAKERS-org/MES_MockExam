@@ -7,32 +7,11 @@ import {
   Home,
   MoreHorizontal,
 } from "lucide-react";
-import { useLanguage, type TranslationKey } from "@/lib/i18n";
+import { useLanguage } from "@/lib/i18n";
 import { SearchInput } from "@/components/shared/search-input";
 import { cn } from "@/lib/utils";
-
-export interface ExamResultRow {
-  id: number;
-  shortName: string;
-  schoolKey: TranslationKey;
-  subjectKey: TranslationKey;
-  score: number;
-  maxScore: number;
-  durationMinutes: number;
-  date: string;
-}
-
-const defaultResults: ExamResultRow[] = [
-  { id: 1, shortName: "ITC", schoolKey: "overview.institutions.itc", subjectKey: "subjects.itc.math", score: 95, maxScore: 100, durationMinutes: 99, date: "2020-12-28" },
-  { id: 2, shortName: "RUPP", schoolKey: "overview.institutions.rupp", subjectKey: "subjects.itc.physics", score: 69, maxScore: 100, durationMinutes: 89, date: "2020-12-28" },
-  { id: 3, shortName: "ITC", schoolKey: "overview.institutions.itc", subjectKey: "subjects.itc.chemistry", score: 99, maxScore: 100, durationMinutes: 119, date: "2020-12-28" },
-  { id: 4, shortName: "ITC", schoolKey: "overview.institutions.itc", subjectKey: "subjects.itc.logic", score: 77, maxScore: 100, durationMinutes: 49, date: "2020-12-28" },
-];
-
-const defaultLogos: Record<string, string> = {
-  ITC: "/images/ITC-logo.png",
-  RUPP: "/images/RUPP-logo.png",
-};
+import { DEFAULT_HISTORY_RESULTS, HISTORY_LOGOS } from "@/data/history";
+import type { ExamResultRow } from "@/data/history";
 
 const PAGE_SIZES = [10, 20, 50];
 
@@ -51,8 +30,8 @@ export interface ExamResultsTableProps {
 }
 
 function ExamResultsTable({
-  data = defaultResults,
-  logos = defaultLogos,
+  data = DEFAULT_HISTORY_RESULTS,
+  logos = HISTORY_LOGOS,
   pageSizes = PAGE_SIZES,
   className,
   onRowAction,
