@@ -2,7 +2,7 @@ import { Building2, Globe, MapPin } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useLanguage, translations } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
-import { InfoRow } from "@/components/shared/info-row";
+import { InfoRow } from "@/components/info/info-row";
 import type { Institution } from "@/data/institutions";
 
 export interface UniInfoSecondCardProps {

@@ -6,12 +6,12 @@ import ExamSubjectsPage from "./pages/exam/subjects-page";
 import ExamOptionsPage from "./pages/exam/options-page";
 import HistoryPage from "./pages/history/page";
 import InfoPage from "./pages/info/page";
-import UniversityPage from "./pages/info/instituteId/page";
+import UniversityPage from "./pages/info/institute-page";
 import ErrorPage from "./pages/error/page";
 import ProfilePage from "./pages/profile/page";
 import ExamLayout from "./layouts/exam-layout";
-import ExamBoardPage from "./pages/exam/board/page";
-import ExamResultPage from "./pages/exam/result/page";
+import ExamBoardPage from "./pages/exam/board-page";
+import ExamResultPage from "./pages/exam/result-page";
 import "./index.css";
 
 export function App() {
