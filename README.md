@@ -37,3 +37,27 @@ bun start       # serves the app without hot reloading
 - `src/locales/` — Khmer/English strings (keep key parity between the two)
 - `public/` — static images and icons
 - `src/styles/` — Tailwind entry points and design tokens
+
+## Deployment (Vercel)
+
+```bash
+# Install Vercel CLI
+bun x vercel login
+
+# Build and deploy to production
+bun run build && bun x vercel --prod
+
+# Deploy preview (non-production, from any branch)
+bun x vercel
+
+# List deployments
+bun x vercel ls
+
+# View project URL
+bun x vercel alias ls
+
+# Remove link to Vercel project
+bun x vercel unlink
+```
+
+Pushing to `main` triggers a preview deployment. Use `bun x vercel --prod` to promote to production.

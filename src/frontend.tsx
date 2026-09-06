@@ -14,6 +14,7 @@ import HistoryPage from "./pages/history/page";
 import InfoPage from "./pages/info/page";
 import InstitutePage from "./pages/info/institute/page";
 import ProfilePage from "./pages/profile/page";
+import InfoComingSoonPage from "./pages/info/coming-soon/page";
 import ErrorPage from "./pages/error/page";
 import "./index.css";
 
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
         { path: ":institution/:subjectId/result", element: <ExamResultPage /> },
       ]},
       { path: "history", element: <HistoryPage /> },
-      { path: "info", element: <InfoPage /> },
+      { path: "info", element: <InfoComingSoonPage /> },
       { path: "info/:institution", element: <InstitutePage /> },
       { path: "profile", element: <ProfilePage /> },
       { path: "*", element: <ErrorPage /> },

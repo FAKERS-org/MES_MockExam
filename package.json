@@ -21,6 +21,7 @@
     "flag-icons": "^7.5.0",
     "katex": "^0.18.5",
     "lucide-react": "^1",
+    "motion": "^13.2.0",
     "radix-ui": "^1.6.7",
     "react": "^19",
     "react-dom": "^19",
