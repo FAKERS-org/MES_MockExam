@@ -9,6 +9,7 @@ export interface NavItem {
   label: string;
   active?: boolean;
   to?: string;
+  comingSoon?: boolean;
 }
 
 export interface SidebarProps {
@@ -64,7 +65,12 @@ function Sidebar({
               )}
             >
               {item.icon}
-              <span>{item.label}</span>
+              <span className="truncate">{item.label}</span>
+              {item.comingSoon && (
+                <span className="ml-auto shrink-0 rounded-full bg-primary/10 px-1.5 py-0.5 text-[10px] font-semibold leading-none text-primary">
+                  {t("nav.comingSoon")}
+                </span>
+              )}
             </button>
           ))}
         </nav>

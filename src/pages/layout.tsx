@@ -64,14 +64,14 @@ function RootLayout() {
 
   // Show exam top bar only on take/result routes (has both institution + subjectId)
   const examSegments = pathname.split("/").filter(Boolean);
-  const isExamTakeOrResult = isExam && examSegments.length >= 4;
+  const isExamTakeOrResult = false;
 
   const navItems: NavItem[] = [
     { icon: <LayoutGrid className="size-4" />, label: t("nav.dashboard"), active: isDashboard, to: "/" },
-    { icon: <ClipboardList className="size-4" />, label: t("nav.exam"), active: isExam, to: "/exam" },
-    { icon: <History className="size-4" />, label: t("nav.history"), active: pathname === "/history", to: "/history" },
+    { icon: <ClipboardList className="size-4" />, label: t("nav.exam"), active: isExam, to: "/exam", comingSoon: true },
+    { icon: <History className="size-4" />, label: t("nav.history"), active: pathname === "/history", to: "/history", comingSoon: true },
     { icon: <FileText className="size-4" />, label: t("nav.info"), active: isInfo, to: "/info" },
-    { icon: <User className="size-4" />, label: t("nav.profile"), active: pathname === "/profile", to: "/profile" },
+    { icon: <User className="size-4" />, label: t("nav.profile"), active: pathname === "/profile", to: "/profile", comingSoon: true },
   ];
 
   return (
