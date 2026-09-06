@@ -5,7 +5,6 @@ import { LanguageProvider } from "@/lib/i18n";
 import RootLayout from "./pages/layout";
 import DashboardPage from "./pages/dashboard/page";
 import ComingSoonPage from "./pages/coming-soon/page";
-import InfoComingSoonPage from "./pages/info/coming-soon/page";
 import InstitutePage from "./pages/info/institute/page";
 import ErrorPage from "./pages/error/page";
 import "./index.css";
@@ -20,7 +19,7 @@ const router = createBrowserRouter([
         { path: "*", element: <ComingSoonPage /> },
       ]},
       { path: "history", element: <ComingSoonPage /> },
-      { path: "info", element: <InfoComingSoonPage /> },
+      { path: "info", element: <ComingSoonPage /> },
       { path: "info/:institution", element: <InstitutePage /> },
       { path: "profile", element: <ComingSoonPage /> },
       { path: "*", element: <ErrorPage /> },

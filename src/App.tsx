@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import DashboardPage from "./pages/dashboard/page";
 import ComingSoonPage from "./pages/coming-soon/page";
-import InfoComingSoonPage from "./pages/info/coming-soon/page";
 import InstitutePage from "./pages/info/institute/page";
 import ErrorPage from "./pages/error/page";
 import "./index.css";
@@ -12,7 +11,7 @@ export function App() {
       <Route path="/" element={<DashboardPage />} />
       <Route path="/exam" element={<ComingSoonPage />} />
       <Route path="/exam/*" element={<ComingSoonPage />} />
-      <Route path="/info" element={<InfoComingSoonPage />} />
+      <Route path="/info" element={<ComingSoonPage />} />
       <Route path="/info/:institution" element={<InstitutePage />} />
       <Route path="/history" element={<ComingSoonPage />} />
       <Route path="/profile" element={<ComingSoonPage />} />
